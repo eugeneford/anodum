@@ -7,7 +7,7 @@
 </h3>
 
 <p align="center">
-  ANother DocuMent Utils library
+  Another Document utils library
 </p>
 
 <p align="center">
