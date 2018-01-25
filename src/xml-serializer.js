@@ -1,1 +1,1 @@
-export default new new XMLSerializer();
+export default new XMLSerializer();

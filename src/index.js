@@ -15,14 +15,11 @@ import isDocumentNode from "./is-document-node";
 import isDocumentTypeNode from "./is-document-type-node";
 import isElementNode from "./is-element-node";
 import isEmbedElement from "./is-embed-element";
-import isEntityNode from "./is-entity-node";
-import isEntityReferenceNode from "./is-entity-reference-node";
 import isHeadingElement from "./is-heading-element";
 import isInteractiveElement from "./is-interactive-element";
 import isNestingAllowed from "./is-nesting-allowed";
 import isNode from "./is-node";
 import isNonEmptyTextNode from "./is-non-empty-text-node";
-import isNotationNode from "./is-notation-node";
 import isOneOfTags from "./is-one-of-tags";
 import isPhrasingElement from "./is-phrasing-element";
 import isProcessingInstructionNode from "./is-processing-instruction-node";
@@ -41,7 +38,7 @@ import traverseElement from "./traverse-element";
 import traverseNode from "./traverse-node";
 import xmlSerializer from "./xml-serializer";
 
-export default {
+export {
   buildTreePathOfNode,
   copyElementAttributes,
   domParser,
@@ -59,14 +56,11 @@ export default {
   isDocumentTypeNode,
   isElementNode,
   isEmbedElement,
-  isEntityNode,
-  isEntityReferenceNode,
   isHeadingElement,
   isInteractiveElement,
   isNestingAllowed,
   isNode,
   isNonEmptyTextNode,
-  isNotationNode,
   isOneOfTags,
   isPhrasingElement,
   isProcessingInstructionNode,
