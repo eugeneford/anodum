@@ -202,18 +202,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (node) {
+  if (!(0, _isNode2.default)(node)) {
+    throw new TypeError("node is not a Node");
+  }
+
   var path = [];
   var elem = node;
   var index = void 0;
 
   while (elem.parentNode) {
-    index = Array.prototype.indexOf.call(parent.children, elem);
+    index = Array.prototype.indexOf.call(elem.parentNode.childNodes, elem);
     path.unshift(index);
     elem = elem.parentNode;
   }
 
+  // Add root node path
+  path.unshift(0);
+
   return path;
 };
+
+var _isNode = __webpack_require__(3);
+
+var _isNode2 = _interopRequireDefault(_isNode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 6 */
@@ -246,10 +259,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = new XMLSerializer();
+
+exports.default = function (node) {
+  return node && node.nodeType === _nodeTypes2.default.COMMENT_NODE;
+};
+
+var _nodeTypes = __webpack_require__(0);
+
+var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = new XMLSerializer();
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -270,7 +304,7 @@ var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -288,7 +322,7 @@ exports.default = function (html) {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -300,7 +334,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = new window.DOMParser();
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -325,27 +359,6 @@ var _isTextNode2 = _interopRequireDefault(_isTextNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (node) {
-  return node && node.nodeType === _nodeTypes2.default.COMMENT_NODE;
-};
-
-var _nodeTypes = __webpack_require__(0);
-
-var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -366,11 +379,11 @@ exports.default = function (node) {
   );
 };
 
-var _isCommentNode = __webpack_require__(12);
+var _isCommentNode = __webpack_require__(7);
 
 var _isCommentNode2 = _interopRequireDefault(_isCommentNode);
 
-var _xmlSerializer = __webpack_require__(7);
+var _xmlSerializer = __webpack_require__(8);
 
 var _xmlSerializer2 = _interopRequireDefault(_xmlSerializer);
 
@@ -603,7 +616,7 @@ var _copyElementAttributes = __webpack_require__(21);
 
 var _copyElementAttributes2 = _interopRequireDefault(_copyElementAttributes);
 
-var _domParser = __webpack_require__(10);
+var _domParser = __webpack_require__(11);
 
 var _domParser2 = _interopRequireDefault(_domParser);
 
@@ -639,7 +652,7 @@ var _isChildOfTag = __webpack_require__(28);
 
 var _isChildOfTag2 = _interopRequireDefault(_isChildOfTag);
 
-var _isCommentNode = __webpack_require__(12);
+var _isCommentNode = __webpack_require__(7);
 
 var _isCommentNode2 = _interopRequireDefault(_isCommentNode);
 
@@ -651,7 +664,7 @@ var _isDocumentFragmentNode = __webpack_require__(29);
 
 var _isDocumentFragmentNode2 = _interopRequireDefault(_isDocumentFragmentNode);
 
-var _isDocumentNode = __webpack_require__(8);
+var _isDocumentNode = __webpack_require__(9);
 
 var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 
@@ -683,7 +696,7 @@ var _isNode = __webpack_require__(3);
 
 var _isNode2 = _interopRequireDefault(_isNode);
 
-var _isNonEmptyTextNode = __webpack_require__(11);
+var _isNonEmptyTextNode = __webpack_require__(12);
 
 var _isNonEmptyTextNode2 = _interopRequireDefault(_isNonEmptyTextNode);
 
@@ -719,7 +732,7 @@ var _nodeTypes = __webpack_require__(0);
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 
-var _normalizeHtml = __webpack_require__(9);
+var _normalizeHtml = __webpack_require__(10);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
@@ -751,7 +764,7 @@ var _traverseNode = __webpack_require__(19);
 
 var _traverseNode2 = _interopRequireDefault(_traverseNode);
 
-var _xmlSerializer = __webpack_require__(7);
+var _xmlSerializer = __webpack_require__(8);
 
 var _xmlSerializer2 = _interopRequireDefault(_xmlSerializer);
 
@@ -874,24 +887,37 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function (document, path) {
+exports.default = function (rootNode, path) {
+  if (!(0, _isNode2.default)(rootNode)) {
+    throw new TypeError('rootNode is not a Node');
+  }
+
+  if (!Array.isArray(path)) {
+    throw new TypeError('path is not an Array');
+  }
+
   var pathClone = path.slice(0);
+  var c = void 0,
+      node = rootNode;
   pathClone.splice(0, 1);
 
-  var c = void 0,
-      node = document.documentElement;
-
   while (pathClone.length > 0) {
-    if (!(node && node.children)) {
+    if (!(node && node.childNodes)) {
       return null;
     }
 
     c = pathClone.splice(0, 1)[0];
-    node = node.children[c];
+    node = node.childNodes[c];
   }
 
   return node;
 };
+
+var _isNode = __webpack_require__(3);
+
+var _isNode2 = _interopRequireDefault(_isNode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 24 */
@@ -956,7 +982,7 @@ var _isElementNode = __webpack_require__(1);
 
 var _isElementNode2 = _interopRequireDefault(_isElementNode);
 
-var _isNonEmptyTextNode = __webpack_require__(11);
+var _isNonEmptyTextNode = __webpack_require__(12);
 
 var _isNonEmptyTextNode2 = _interopRequireDefault(_isNonEmptyTextNode);
 
@@ -1357,7 +1383,7 @@ exports.default = function (html, removeComments) {
     var comments = [];
 
     (0, _traverseNode2.default)(dom, function (node) {
-      if ((0, _isConditionalCommentNode2.default)(node)) {
+      if ((0, _isCommentNode2.default)(node) && !(0, _isConditionalCommentNode2.default)(node)) {
         comments.push(node);
       }
     });
@@ -1370,7 +1396,7 @@ exports.default = function (html, removeComments) {
   return dom;
 };
 
-var _domParser = __webpack_require__(10);
+var _domParser = __webpack_require__(11);
 
 var _domParser2 = _interopRequireDefault(_domParser);
 
@@ -1382,7 +1408,11 @@ var _isConditionalCommentNode = __webpack_require__(13);
 
 var _isConditionalCommentNode2 = _interopRequireDefault(_isConditionalCommentNode);
 
-var _normalizeHtml = __webpack_require__(9);
+var _isCommentNode = __webpack_require__(7);
+
+var _isCommentNode2 = _interopRequireDefault(_isCommentNode);
+
+var _normalizeHtml = __webpack_require__(10);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
@@ -1412,7 +1442,7 @@ exports.default = function (html) {
   return container.firstElementChild;
 };
 
-var _normalizeHtml = __webpack_require__(9);
+var _normalizeHtml = __webpack_require__(10);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
@@ -1511,11 +1541,11 @@ var _nodeTypes = __webpack_require__(0);
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 
-var _xmlSerializer = __webpack_require__(7);
+var _xmlSerializer = __webpack_require__(8);
 
 var _xmlSerializer2 = _interopRequireDefault(_xmlSerializer);
 
-var _isDocumentNode = __webpack_require__(8);
+var _isDocumentNode = __webpack_require__(9);
 
 var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 
@@ -1542,7 +1572,7 @@ exports.default = function (node) {
   return '<!DOCTYPE ' + doctype.name + (doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '') + (!doctype.publicId && doctype.systemId ? ' SYSTEM' : '') + (doctype.systemId ? ' "' + doctype.systemId + '"' : '') + '>';
 };
 
-var _isDocumentNode = __webpack_require__(8);
+var _isDocumentNode = __webpack_require__(9);
 
 var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 
