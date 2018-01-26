@@ -1,5 +1,5 @@
 import isNode from "./is-node";
-import buildTreePathOfNode from "./build-tree-path-of-node";
+import getTreePathOfNode from "./get-tree-path-of-node";
 
 export default function (node, onStep, includePath = false) {
   if (!isNode(node)) {
@@ -14,7 +14,7 @@ export default function (node, onStep, includePath = false) {
 
   // Create path holder if includePath = true was passed
   if (includePath) {
-    path = buildTreePathOfNode(node);
+    path = getTreePathOfNode(node);
   }
 
   while (node) {

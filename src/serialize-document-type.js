@@ -6,9 +6,9 @@ export default function (node) {
     throw new TypeError('node is not a Document or DocumentType');
   }
 
-  const doctype = isDocumentNode(node) ? node : node.doctype;
+  const doctype = isDocumentNode(node) ? node.doctype : node;
 
-  return "<!DOCTYPE "
+  return '<!DOCTYPE '
     + doctype.name
     + (doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '')
     + (!doctype.publicId && doctype.systemId ? ' SYSTEM' : '')

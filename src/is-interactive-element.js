@@ -11,12 +11,11 @@ export default function (element) {
   }
 
   if (isTag(element, "input")) {
-    return element.getAttribute("type") === "hidden";
+    return element.getAttribute("type") !== "hidden";
   }
 
   return isOneOfTags(element, [
     "a",
-    "audio",
     "button",
     "embed",
     "iframe",

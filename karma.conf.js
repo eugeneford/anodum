@@ -52,6 +52,6 @@ module.exports = function(config) {
       }
     },
     browsers: browsers,
-    captureTimeout: 4 * 60 * 1000
+    captureTimeout: 10 * 60 * 1000
   })
 };

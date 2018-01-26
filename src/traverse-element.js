@@ -1,5 +1,5 @@
 import isElementNode from "./is-element-node";
-import buildTreePathOfNode from "./build-tree-path-of-node";
+import getTreePathOfNode from "./get-tree-path-of-node";
 
 export default function (element, onStep, includePath = false) {
   if (!isElementNode(element)) {
@@ -13,7 +13,7 @@ export default function (element, onStep, includePath = false) {
   let endNode = element, index = 0, path = [];
 
   // Create path holder if includePath = true was passed
-  if (includePath) path = buildTreePathOfNode(element);
+  if (includePath) path = getTreePathOfNode(element);
 
   while (element) {
     // Going deeper

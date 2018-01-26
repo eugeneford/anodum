@@ -1,9 +1,9 @@
 import {
-  buildTreePathOfNode,
   copyElementAttributes,
   domParser,
   getElementHeight,
   getNodeByTreePath,
+  getTreePathOfNode,
   hasNonEmptyPseudoElements,
   hasNonEmptyTextNodes,
   isAttributeNode,
@@ -40,7 +40,11 @@ import {
   xmlSerializer
 } from '../src/index';
 
+import "./copy-element-attributes.spec.js";
+import "./get-element-height.spec.js";
 import "./is-attribute-node.spec.js";
+import "./is-child-of-element.spec.js";
+import "./is-child-of-tag.spec.js";
 import "./is-comment-node.spec.js";
 import "./is-conditional-comment-node.spec.js";
 import "./is-document-fragment-node.spec.js";
@@ -49,20 +53,20 @@ import "./is-document-type-node.spec.js";
 import "./is-element-node.spec.js";
 import "./is-embed-element.spec.js";
 import "./is-heading-element.spec.js";
+import "./is-interactive-element.spec.js";
 import "./is-node.spec.js";
 import "./is-non-empty-text-node.spec.js";
 import "./is-one-of-tags.spec.js";
 import "./is-phrasing-element.spec.js";
+import "./is-processing-instruction-node.spec.js";
 import "./is-sectioning-element.spec.js";
 import "./is-self-closing-element.spec.js";
 import "./is-tag.spec.js";
 import "./is-text-node.spec.js";
+import "./normalize-html.spec.js";
+import "./serialize-document-type.spec.js";
 
 describe('Anodum', ()=>{
-  it('buildTreePathOfNode() is defined', ()=>{
-    expect(buildTreePathOfNode).toBeDefined();
-  });
-
   it('copyElementAttributes() is defined', ()=>{
     expect(copyElementAttributes).toBeDefined();
   });
@@ -77,6 +81,10 @@ describe('Anodum', ()=>{
 
   it('getNodeByTreePath() is defined', ()=>{
     expect(getNodeByTreePath).toBeDefined();
+  });
+
+  it('getTreePathOfNode() is defined', ()=>{
+    expect(getTreePathOfNode).toBeDefined();
   });
 
   it('hasNonEmptyPseudoElements() is defined', ()=>{

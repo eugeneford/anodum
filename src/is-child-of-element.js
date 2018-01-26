@@ -10,10 +10,10 @@ export default function(node, testElement){
     throw new TypeError("testElement is not an Element");
   }
 
-  let parentNode;
+  let currentNode = node;
 
-  while (parentNode = node.parentElement) {
-    if (parentNode === testElement) {
+  while (currentNode = currentNode.parentElement) {
+    if (currentNode === testElement) {
       return true;
     }
   }

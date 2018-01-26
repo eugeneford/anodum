@@ -1,8 +1,8 @@
-import buildTreePathOfNode from "./build-tree-path-of-node";
 import copyElementAttributes from "./copy-element-attributes";
 import domParser from "./dom-parser";
 import getElementHeight from "./get-element-height";
 import getNodeByTreePath from "./get-node-by-tree-path";
+import getTreePathOfNode from "./get-tree-path-of-node";
 import hasNonEmptyPseudoElements from "./has-non-empty-pseudo-elements";
 import hasNonEmptyTextNodes from "./has-non-empty-text-nodes";
 import isAttributeNode from "./is-attribute-node";
@@ -39,11 +39,11 @@ import traverseNode from "./traverse-node";
 import xmlSerializer from "./xml-serializer";
 
 export {
-  buildTreePathOfNode,
   copyElementAttributes,
   domParser,
   getElementHeight,
   getNodeByTreePath,
+  getTreePathOfNode,
   hasNonEmptyPseudoElements,
   hasNonEmptyTextNodes,
   isAttributeNode,

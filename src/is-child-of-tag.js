@@ -9,11 +9,11 @@ export default function(node, testTag){
     throw new TypeError("testTag is not a string");
   }
 
-  let parentNode;
+  let currentNode = node;
   let tag = testTag.toLowerCase();
 
-  while (parentNode = node.parentNode) {
-    if (parentNode.tagName.toLowerCase() === tag) {
+  while ((currentNode = currentNode.parentNode) && currentNode.tagName) {
+    if (currentNode.tagName.toLowerCase() === tag) {
       return true;
     }
   }
