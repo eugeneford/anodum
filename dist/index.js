@@ -246,7 +246,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = new new XMLSerializer()();
+exports.default = new XMLSerializer();
 
 /***/ }),
 /* 8 */
@@ -284,7 +284,7 @@ exports.default = function (html) {
   if (typeof html !== "string") {
     throw new TypeError("html is not a string");
   }
-  return html.trim().replace(/[\r\n\t]/g, " ");
+  return html.trim().replace(/[\r\uFEFF\u2060]/g, "").replace(/[\n\t\u202F\u2007]/g, " ");
 };
 
 /***/ }),
@@ -439,10 +439,10 @@ exports.default = function (element) {
   }
 
   if ((0, _isTag2.default)(element, "input")) {
-    return element.getAttribute("type") === "hidden";
+    return element.getAttribute("type") !== "hidden";
   }
 
-  return (0, _isOneOfTags2.default)(element, ["a", "audio", "button", "embed", "iframe", "keygen", "label", "select", "textarea"]);
+  return (0, _isOneOfTags2.default)(element, ["a", "button", "embed", "iframe", "keygen", "label", "select", "textarea"]);
 };
 
 var _isTag = __webpack_require__(4);
@@ -525,7 +525,7 @@ exports.default = function (node, onStep) {
 
   // Create path holder if includePath = true was passed
   if (includePath) {
-    path = (0, _buildTreePathOfNode2.default)(node);
+    path = (0, _getTreePathOfNode2.default)(node);
   }
 
   while (node) {
@@ -581,9 +581,9 @@ var _isNode = __webpack_require__(3);
 
 var _isNode2 = _interopRequireDefault(_isNode);
 
-var _buildTreePathOfNode = __webpack_require__(5);
+var _getTreePathOfNode = __webpack_require__(5);
 
-var _buildTreePathOfNode2 = _interopRequireDefault(_buildTreePathOfNode);
+var _getTreePathOfNode2 = _interopRequireDefault(_getTreePathOfNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -597,10 +597,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _buildTreePathOfNode = __webpack_require__(5);
-
-var _buildTreePathOfNode2 = _interopRequireDefault(_buildTreePathOfNode);
+exports.xmlSerializer = exports.traverseNode = exports.traverseElement = exports.serializeDocumentType = exports.serializeDocument = exports.removeSetOfNodes = exports.parseElementFromString = exports.parseDocumentFromString = exports.normalizeHTML = exports.nodeTypes = exports.isTextNode = exports.isTag = exports.isSelfClosingElement = exports.isSectioningElement = exports.isProcessingInstructionNode = exports.isPhrasingElement = exports.isOneOfTags = exports.isNonEmptyTextNode = exports.isNode = exports.isNestingAllowed = exports.isInteractiveElement = exports.isHeadingElement = exports.isEmbedElement = exports.isElementNode = exports.isDocumentTypeNode = exports.isDocumentNode = exports.isDocumentFragmentNode = exports.isConditionalCommentNode = exports.isCommentNode = exports.isChildOfTag = exports.isChildOfElement = exports.isAttributeNode = exports.hasNonEmptyShallowTextNodes = exports.hasNonEmptyPseudoElements = exports.getTreePathOfNode = exports.getNodeByTreePath = exports.getElementHeight = exports.domParser = exports.copyElementAttributes = undefined;
 
 var _copyElementAttributes = __webpack_require__(21);
 
@@ -618,13 +615,17 @@ var _getNodeByTreePath = __webpack_require__(23);
 
 var _getNodeByTreePath2 = _interopRequireDefault(_getNodeByTreePath);
 
+var _getTreePathOfNode = __webpack_require__(5);
+
+var _getTreePathOfNode2 = _interopRequireDefault(_getTreePathOfNode);
+
 var _hasNonEmptyPseudoElements = __webpack_require__(24);
 
 var _hasNonEmptyPseudoElements2 = _interopRequireDefault(_hasNonEmptyPseudoElements);
 
-var _hasNonEmptyTextNodes = __webpack_require__(25);
+var _hasNonEmptyShallowTextNodes = __webpack_require__(25);
 
-var _hasNonEmptyTextNodes2 = _interopRequireDefault(_hasNonEmptyTextNodes);
+var _hasNonEmptyShallowTextNodes2 = _interopRequireDefault(_hasNonEmptyShallowTextNodes);
 
 var _isAttributeNode = __webpack_require__(26);
 
@@ -666,14 +667,6 @@ var _isEmbedElement = __webpack_require__(30);
 
 var _isEmbedElement2 = _interopRequireDefault(_isEmbedElement);
 
-var _isEntityNode = __webpack_require__(31);
-
-var _isEntityNode2 = _interopRequireDefault(_isEntityNode);
-
-var _isEntityReferenceNode = __webpack_require__(32);
-
-var _isEntityReferenceNode2 = _interopRequireDefault(_isEntityReferenceNode);
-
 var _isHeadingElement = __webpack_require__(15);
 
 var _isHeadingElement2 = _interopRequireDefault(_isHeadingElement);
@@ -682,7 +675,7 @@ var _isInteractiveElement = __webpack_require__(16);
 
 var _isInteractiveElement2 = _interopRequireDefault(_isInteractiveElement);
 
-var _isNestingAllowed = __webpack_require__(33);
+var _isNestingAllowed = __webpack_require__(31);
 
 var _isNestingAllowed2 = _interopRequireDefault(_isNestingAllowed);
 
@@ -694,10 +687,6 @@ var _isNonEmptyTextNode = __webpack_require__(11);
 
 var _isNonEmptyTextNode2 = _interopRequireDefault(_isNonEmptyTextNode);
 
-var _isNotationNode = __webpack_require__(34);
-
-var _isNotationNode2 = _interopRequireDefault(_isNotationNode);
-
 var _isOneOfTags = __webpack_require__(2);
 
 var _isOneOfTags2 = _interopRequireDefault(_isOneOfTags);
@@ -706,7 +695,7 @@ var _isPhrasingElement = __webpack_require__(17);
 
 var _isPhrasingElement2 = _interopRequireDefault(_isPhrasingElement);
 
-var _isProcessingInstructionNode = __webpack_require__(35);
+var _isProcessingInstructionNode = __webpack_require__(32);
 
 var _isProcessingInstructionNode2 = _interopRequireDefault(_isProcessingInstructionNode);
 
@@ -714,7 +703,7 @@ var _isSectioningElement = __webpack_require__(18);
 
 var _isSectioningElement2 = _interopRequireDefault(_isSectioningElement);
 
-var _isSelfClosingElement = __webpack_require__(36);
+var _isSelfClosingElement = __webpack_require__(33);
 
 var _isSelfClosingElement2 = _interopRequireDefault(_isSelfClosingElement);
 
@@ -734,27 +723,27 @@ var _normalizeHtml = __webpack_require__(9);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
-var _parseDocumentFromString = __webpack_require__(37);
+var _parseDocumentFromString = __webpack_require__(34);
 
 var _parseDocumentFromString2 = _interopRequireDefault(_parseDocumentFromString);
 
-var _parseElementFromString = __webpack_require__(38);
+var _parseElementFromString = __webpack_require__(35);
 
 var _parseElementFromString2 = _interopRequireDefault(_parseElementFromString);
 
-var _removeSetOfNodes = __webpack_require__(39);
+var _removeSetOfNodes = __webpack_require__(36);
 
 var _removeSetOfNodes2 = _interopRequireDefault(_removeSetOfNodes);
 
-var _serializeDocument = __webpack_require__(40);
+var _serializeDocument = __webpack_require__(37);
 
 var _serializeDocument2 = _interopRequireDefault(_serializeDocument);
 
-var _serializeDocumentType = __webpack_require__(41);
+var _serializeDocumentType = __webpack_require__(38);
 
 var _serializeDocumentType2 = _interopRequireDefault(_serializeDocumentType);
 
-var _traverseElement = __webpack_require__(42);
+var _traverseElement = __webpack_require__(39);
 
 var _traverseElement2 = _interopRequireDefault(_traverseElement);
 
@@ -768,50 +757,45 @@ var _xmlSerializer2 = _interopRequireDefault(_xmlSerializer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-  buildTreePathOfNode: _buildTreePathOfNode2.default,
-  copyElementAttributes: _copyElementAttributes2.default,
-  domParser: _domParser2.default,
-  getElementHeight: _getElementHeight2.default,
-  getNodeByTreePath: _getNodeByTreePath2.default,
-  hasNonEmptyPseudoElements: _hasNonEmptyPseudoElements2.default,
-  hasNonEmptyTextNodes: _hasNonEmptyTextNodes2.default,
-  isAttributeNode: _isAttributeNode2.default,
-  isChildOfElement: _isChildOfElement2.default,
-  isChildOfTag: _isChildOfTag2.default,
-  isCommentNode: _isCommentNode2.default,
-  isConditionalCommentNode: _isConditionalCommentNode2.default,
-  isDocumentFragmentNode: _isDocumentFragmentNode2.default,
-  isDocumentNode: _isDocumentNode2.default,
-  isDocumentTypeNode: _isDocumentTypeNode2.default,
-  isElementNode: _isElementNode2.default,
-  isEmbedElement: _isEmbedElement2.default,
-  isEntityNode: _isEntityNode2.default,
-  isEntityReferenceNode: _isEntityReferenceNode2.default,
-  isHeadingElement: _isHeadingElement2.default,
-  isInteractiveElement: _isInteractiveElement2.default,
-  isNestingAllowed: _isNestingAllowed2.default,
-  isNode: _isNode2.default,
-  isNonEmptyTextNode: _isNonEmptyTextNode2.default,
-  isNotationNode: _isNotationNode2.default,
-  isOneOfTags: _isOneOfTags2.default,
-  isPhrasingElement: _isPhrasingElement2.default,
-  isProcessingInstructionNode: _isProcessingInstructionNode2.default,
-  isSectioningElement: _isSectioningElement2.default,
-  isSelfClosingElement: _isSelfClosingElement2.default,
-  isTag: _isTag2.default,
-  isTextNode: _isTextNode2.default,
-  nodeTypes: _nodeTypes2.default,
-  normalizeHTML: _normalizeHtml2.default,
-  parseDocumentFromString: _parseDocumentFromString2.default,
-  parseElementFromString: _parseElementFromString2.default,
-  removeSetOfNodes: _removeSetOfNodes2.default,
-  serializeDocument: _serializeDocument2.default,
-  serializeDocumentType: _serializeDocumentType2.default,
-  traverseElement: _traverseElement2.default,
-  traverseNode: _traverseNode2.default,
-  xmlSerializer: _xmlSerializer2.default
-};
+exports.copyElementAttributes = _copyElementAttributes2.default;
+exports.domParser = _domParser2.default;
+exports.getElementHeight = _getElementHeight2.default;
+exports.getNodeByTreePath = _getNodeByTreePath2.default;
+exports.getTreePathOfNode = _getTreePathOfNode2.default;
+exports.hasNonEmptyPseudoElements = _hasNonEmptyPseudoElements2.default;
+exports.hasNonEmptyShallowTextNodes = _hasNonEmptyShallowTextNodes2.default;
+exports.isAttributeNode = _isAttributeNode2.default;
+exports.isChildOfElement = _isChildOfElement2.default;
+exports.isChildOfTag = _isChildOfTag2.default;
+exports.isCommentNode = _isCommentNode2.default;
+exports.isConditionalCommentNode = _isConditionalCommentNode2.default;
+exports.isDocumentFragmentNode = _isDocumentFragmentNode2.default;
+exports.isDocumentNode = _isDocumentNode2.default;
+exports.isDocumentTypeNode = _isDocumentTypeNode2.default;
+exports.isElementNode = _isElementNode2.default;
+exports.isEmbedElement = _isEmbedElement2.default;
+exports.isHeadingElement = _isHeadingElement2.default;
+exports.isInteractiveElement = _isInteractiveElement2.default;
+exports.isNestingAllowed = _isNestingAllowed2.default;
+exports.isNode = _isNode2.default;
+exports.isNonEmptyTextNode = _isNonEmptyTextNode2.default;
+exports.isOneOfTags = _isOneOfTags2.default;
+exports.isPhrasingElement = _isPhrasingElement2.default;
+exports.isProcessingInstructionNode = _isProcessingInstructionNode2.default;
+exports.isSectioningElement = _isSectioningElement2.default;
+exports.isSelfClosingElement = _isSelfClosingElement2.default;
+exports.isTag = _isTag2.default;
+exports.isTextNode = _isTextNode2.default;
+exports.nodeTypes = _nodeTypes2.default;
+exports.normalizeHTML = _normalizeHtml2.default;
+exports.parseDocumentFromString = _parseDocumentFromString2.default;
+exports.parseElementFromString = _parseElementFromString2.default;
+exports.removeSetOfNodes = _removeSetOfNodes2.default;
+exports.serializeDocument = _serializeDocument2.default;
+exports.serializeDocumentType = _serializeDocumentType2.default;
+exports.traverseElement = _traverseElement2.default;
+exports.traverseNode = _traverseNode2.default;
+exports.xmlSerializer = _xmlSerializer2.default;
 
 /***/ }),
 /* 21 */
@@ -1019,10 +1003,10 @@ exports.default = function (node, testElement) {
     throw new TypeError("testElement is not an Element");
   }
 
-  var parentNode = void 0;
+  var currentNode = node;
 
-  while (parentNode = node.parentElement) {
-    if (parentNode === testElement) {
+  while (currentNode = currentNode.parentElement) {
+    if (currentNode === testElement) {
       return true;
     }
   }
@@ -1060,11 +1044,11 @@ exports.default = function (node, testTag) {
     throw new TypeError("testTag is not a string");
   }
 
-  var parentNode = void 0;
+  var currentNode = node;
   var tag = testTag.toLowerCase();
 
-  while (parentNode = node.parentNode) {
-    if (parentNode.tagName.toLowerCase() === tag) {
+  while ((currentNode = currentNode.parentNode) && currentNode.tagName) {
+    if (currentNode.tagName.toLowerCase() === tag) {
       return true;
     }
   }
@@ -1090,7 +1074,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (node) {
-  return node && node.nodeType === _nodeTypes2.default.NOTATION_NODE;
+  return node && node.nodeType === _nodeTypes2.default.DOCUMENT_FRAGMENT_NODE;
 };
 
 var _nodeTypes = __webpack_require__(0);
@@ -1122,48 +1106,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (node) {
-  return node && node.nodeType === _nodeTypes2.default.ENTITY_NODE;
-};
-
-var _nodeTypes = __webpack_require__(0);
-
-var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (node) {
-  return node && node.nodeType === _nodeTypes2.default.ENTITY_REFERENCE_NODE;
-};
-
-var _nodeTypes = __webpack_require__(0);
-
-var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1355,28 +1297,7 @@ var _isInteractiveElement2 = _interopRequireDefault(_isInteractiveElement);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (node) {
-  return node && node.nodeType === _nodeTypes2.default.DOCUMENT_NODE;
-};
-
-var _nodeTypes = __webpack_require__(0);
-
-var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 35 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1397,7 +1318,7 @@ var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 36 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1418,7 +1339,7 @@ var _isOneOfTags2 = _interopRequireDefault(_isOneOfTags);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 37 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1468,7 +1389,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 38 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1498,7 +1419,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 39 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1551,7 +1472,7 @@ var _isTextNode2 = _interopRequireDefault(_isTextNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 40 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1604,7 +1525,7 @@ var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 41 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1619,9 +1540,9 @@ exports.default = function (node) {
     throw new TypeError('node is not a Document or DocumentType');
   }
 
-  var doctype = (0, _isDocumentNode2.default)(node) ? node : node.doctype;
+  var doctype = (0, _isDocumentNode2.default)(node) ? node.doctype : node;
 
-  return "<!DOCTYPE " + doctype.name + (doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '') + (!doctype.publicId && doctype.systemId ? ' SYSTEM' : '') + (doctype.systemId ? ' "' + doctype.systemId + '"' : '') + '>';
+  return '<!DOCTYPE ' + doctype.name + (doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '') + (!doctype.publicId && doctype.systemId ? ' SYSTEM' : '') + (doctype.systemId ? ' "' + doctype.systemId + '"' : '') + '>';
 };
 
 var _isDocumentNode = __webpack_require__(8);
@@ -1635,7 +1556,7 @@ var _isDocumentTypeNode2 = _interopRequireDefault(_isDocumentTypeNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 42 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1661,7 +1582,7 @@ exports.default = function (element, onStep) {
       path = [];
 
   // Create path holder if includePath = true was passed
-  if (includePath) path = (0, _buildTreePathOfNode2.default)(element);
+  if (includePath) path = (0, _getTreePathOfNode2.default)(element);
 
   while (element) {
     // Going deeper
@@ -1717,9 +1638,9 @@ var _isElementNode = __webpack_require__(1);
 
 var _isElementNode2 = _interopRequireDefault(_isElementNode);
 
-var _buildTreePathOfNode = __webpack_require__(5);
+var _getTreePathOfNode = __webpack_require__(5);
 
-var _buildTreePathOfNode2 = _interopRequireDefault(_buildTreePathOfNode);
+var _getTreePathOfNode2 = _interopRequireDefault(_getTreePathOfNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

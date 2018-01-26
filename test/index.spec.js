@@ -5,7 +5,7 @@ import {
   getNodeByTreePath,
   getTreePathOfNode,
   hasNonEmptyPseudoElements,
-  hasNonEmptyTextNodes,
+  hasNonEmptyShallowTextNodes,
   isAttributeNode,
   isChildOfElement,
   isChildOfTag,
@@ -42,6 +42,7 @@ import {
 
 import "./copy-element-attributes.spec.js";
 import "./get-element-height.spec.js";
+import "./has-non-empty-shallow-text-nodes.spec.js";
 import "./is-attribute-node.spec.js";
 import "./is-child-of-element.spec.js";
 import "./is-child-of-tag.spec.js";
@@ -91,8 +92,8 @@ describe('Anodum', ()=>{
     expect(hasNonEmptyPseudoElements).toBeDefined();
   });
 
-  it('hasNonEmptyTextNodes() is defined', ()=>{
-    expect(hasNonEmptyTextNodes).toBeDefined();
+  it('hasNonEmptyShallowTextNodes() is defined', ()=>{
+    expect(hasNonEmptyShallowTextNodes).toBeDefined();
   });
 
   it('isAttributeNode() is defined', ()=>{
