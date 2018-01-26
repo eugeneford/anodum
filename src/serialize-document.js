@@ -4,7 +4,7 @@ import isDocumentNode from "./is-document-node";
 
 export default function (node) {
   if (!isDocumentNode(node)) {
-    throw new Error('node is not a DocumentNode');
+    throw new TypeError('node is not a DocumentNode');
   }
 
   let elem = node.documentElement, html = "";
@@ -13,9 +13,6 @@ export default function (node) {
     switch (elem.nodeType) {
       case nodeTypes.ELEMENT_NODE:
         html = elem.outerHTML + html;
-        break;
-      case nodeTypes.TEXT_NODE:
-        html = elem.data + html;
         break;
       default: // Comments and other stuff
         html = xmlSerializer.serializeToString(elem) + html;

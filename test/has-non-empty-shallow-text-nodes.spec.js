@@ -10,9 +10,15 @@ describe('hasNonEmptyShallowTextNodes', ()=>{
     expect(hasNonEmptyShallowTextNodes(element)).toBe(false);
   });
 
-  it('\'<div><div></div>text</div>\' element has non-empty text nodes', ()=>{
+  it('\'<div><div></div>text<div></div></div>\' element has non-empty text nodes', ()=>{
     const element = document.createElement('div');
     element.innerHTML = '<div></div>text<div></div>';
     expect(hasNonEmptyShallowTextNodes(element)).toBe(true);
+  });
+
+  it('\'<div><div></div></div>\' element doesn\'t have non-empty text nodes', ()=>{
+    const element = document.createElement('div');
+    element.innerHTML = '<div></div>';
+    expect(hasNonEmptyShallowTextNodes(element)).toBe(false);
   });
 });

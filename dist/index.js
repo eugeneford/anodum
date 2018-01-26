@@ -1484,7 +1484,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (node) {
   if (!(0, _isDocumentNode2.default)(node)) {
-    throw new Error('node is not a DocumentNode');
+    throw new TypeError('node is not a DocumentNode');
   }
 
   var elem = node.documentElement,
@@ -1494,9 +1494,6 @@ exports.default = function (node) {
     switch (elem.nodeType) {
       case _nodeTypes2.default.ELEMENT_NODE:
         html = elem.outerHTML + html;
-        break;
-      case _nodeTypes2.default.TEXT_NODE:
-        html = elem.data + html;
         break;
       default:
         // Comments and other stuff

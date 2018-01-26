@@ -42,6 +42,7 @@ import {
 
 import "./copy-element-attributes.spec.js";
 import "./get-element-height.spec.js";
+import "./has-non-empty-pseudo-elements.spec";
 import "./has-non-empty-shallow-text-nodes.spec.js";
 import "./is-attribute-node.spec.js";
 import "./is-child-of-element.spec.js";
@@ -65,6 +66,7 @@ import "./is-self-closing-element.spec.js";
 import "./is-tag.spec.js";
 import "./is-text-node.spec.js";
 import "./normalize-html.spec.js";
+import "./serialize-document.spec.js";
 import "./serialize-document-type.spec.js";
 
 describe('Anodum', ()=>{
