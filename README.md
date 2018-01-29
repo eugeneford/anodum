@@ -55,10 +55,18 @@ var result = Anodum.isNode(document); // result => true
 </script>
 ```
 
+## Constants
+Anodum exports a small set of predefined constants eg.
+* ``domParser``
+* ``xmlSerializer``
+* ``nodeTypes``
+
+You are able to use them as well as any of API methods bellow.
+
 ## API
 
 ### copyElementAttributes(element, targetElement)
-Copies all attributes of element into targetElement. Existing targetElement attributes will be overwritten.
+Copies all attributes of ``element`` into ``targetElement``. Existing ``targetElement`` attributes will be overwritten.
 
 ```js
 import { copyElementAttributes } from "anodum"; // or Anodum.copyElementAttributes if using in browser
@@ -75,8 +83,9 @@ copyElementAttributes(sourceNode, targetNode);
 // tragetNode.getAttribute('class') => 'container'
 ```
 
+
 ### getElementHeight(element, includeMargins)
-Calculates element height. If includeMargins is set to true the final value will include top and bottom margins
+Calculates ``element`` height. If ``includeMargins`` is set to true the final value will include top and bottom margins
 
 ```js
 import { getElementHeight } from "anodum"; // or Anodum.getElementHeight if using in browser
@@ -90,5 +99,463 @@ element.style.marginBottom = '20px';
 
 const height = getElementHeight(element); // height => 80px
 ```
+
+
+### getNodeByTreePath(rootNode, path)
+Looks for an element inside ``rootNode`` by related tree path ``path``.
+
+```js
+import { getNodeByTreePath } from "anodum"; // or Anodum.getNodeByTreePath if using in browser
+
+const path = [0, 1, 1, 0];
+const rootNode = document.createElement('div');
+rootNode.innerHTML = 'text<div><h1></h1><p>target</p></div>';
+
+const node = getNodeByTreePath(rootNode, path);
+
+// node.nodeType => 3 (#text)
+// node.textContent => target
+```
+
+
+### getTreePathOfNode(node)
+Calculates a tree path of target ``node``.
+
+```js
+import { getTreePathOfNode } from "anodum"; // or Anodum.getTreePathOfNode if using in browser
+
+const element = document.createElement('div');
+element.innerHTML = 'text<p>inner text</p>';
+
+const path = getTreePathOfNode(element.lastChild.firstChild);
+
+// path => [0, 1, 0]
+```
+
+
+### hasNonEmptyPseudoElements(element)
+Checks if ``element`` has the ``:before`` or ``:after`` elements with non-empty ``content`` property.
+
+```js
+import { hasNonEmptyPseudoElements } from "anodum"; // or Anodum.hasNonEmptyPseudoElements if using in browser
+
+const element = document.createElement('div');
+const style = document.createElement('style');
+style.innerHTML = 'div:before { content: "true" }';
+
+document.body.appendChild(style);
+document.body.appendChild(element);
+
+const result = hasNonEmptyPseudoElements(element); // result => true
+```
+
+
+### hasNonEmptyShallowTextNodes(element)
+Checks if ``element`` has a non-empty direct text child node.
+
+```js
+import { hasNonEmptyShallowTextNodes } from "anodum"; // or Anodum.hasNonEmptyShallowTextNodes if using in browser
+
+const element = document.createElement('div');
+element.innerHTML = 'text';
+
+const result = hasNonEmptyShallowTextNodes(element); // result => true
+```
+
+
+### isAttributeNode(node)
+Check if ``node`` is an AttributeNode
+
+```js
+import { isAttributeNode } from "anodum"; // or Anodum.isAttributeNode if using in browser
+
+const node = document.createAttribute('name');
+const result = isAttributeNode(node); // result => true
+```
+
+
+### isChildOfElement(node, testElement)
+Checks if ``node`` is a child of target ``testElement``
+
+```js
+import { isChildOfElement } from "anodum"; // or Anodum.isChildOfElement if using in browser
+
+const highLevelContainer = document.createElement('section');
+const container = document.createElement('div');
+const node = document.createElement('div');
+
+highLevelContainer.appendChild(container);
+container.appendChild(node);
+
+const result = isChildOfElement(node, highLevelContainer); // result => true
+```
+
+
+### isChildOfTag(node, testTag)
+Checks if ``node`` is a child of an element with target ``testTag``
+
+```js
+import { isChildOfTag } from "anodum"; // or Anodum.isChildOfTag if using in browser
+
+const highLevelContainer = document.createElement('section');
+const container = document.createElement('div');
+const node = document.createElement('div');
+
+highLevelContainer.appendChild(container);
+container.appendChild(node);
+
+const result = isChildOfTag(node, 'section'); // result => true
+```
+
+
+### isCommentNode(node)
+Checks if ``node`` is a CommentNode
+
+```js
+import { isCommentNode } from "anodum"; // or Anodum.isCommentNode if using in browser
+
+const node = document.createComment('content');
+
+const result = isCommentNode(node); // result => true
+```
+
+
+### isConditionalCommentNode(node)
+Checks if ``node`` is a conditional CommentNode
+
+```js
+import { isConditionalCommentNode } from "anodum"; // or Anodum.isConditionalCommentNode if using in browser
+
+const container = document.createElement('div');
+container.innerHTML = '<![if expression]> HTML <![endif]>';
+const node = container.firstChild;
+
+const result = isConditionalComment(node); // result => true
+```
+
+
+### isDocumentFragmentNode(node)
+Checks if ``node`` is a DocumentFragmentNode
+
+```js
+import { isDocumentFragmentNode } from "anodum"; // or Anodum.isDocumentFragmentNode if using in browser
+
+const node = document.createDocumentFragment();
+
+const result = isDocumentFragmentNode(node); // result => true
+```
+
+
+### isDocumentNode(node)
+Checks if ``node`` is a DocumentNode
+
+```js
+import { isDocumentNode } from "anodum"; // or Anodum.isDocumentNode if using in browser
+
+const result = isDocumentNode(document); // result => true
+```
+
+
+### isDocumentTypeNode(node)
+Checks if ``node`` is a DocumentTypeNode
+
+```js
+import { isDocumentTypeNode } from "anodum"; // or Anodum.isDocumentTypeNode if using in browser
+
+const node = document.doctype;
+
+const result = isDocumentTypeNode(node); // result => true
+```
+
+
+### isElementNode(node)
+Checks if ``node`` is a ElementNode
+
+```js
+import { isElementNode } from "anodum"; // or Anodum.isElementNode if using in browser
+
+const node = document.createElement('div');
+
+const result = isElementNode(node); // result => true
+```
+
+
+### isEmbedElement(node)
+Checks if ``node`` is a embed element. More details [here](https://html.spec.whatwg.org/multipage/dom.html#embedded-content-category)
+
+```js
+import { isEmbedElement } from "anodum"; // or Anodum.isEmbedElement if using in browser
+
+const node = document.createElement('video');
+
+const result = isEmbedElement(node); // result => true
+```
+
+
+### isHeadingElement(node)
+Checks if ``node`` is a heading element. More details [here](https://html.spec.whatwg.org/multipage/dom.html#heading-content-category)
+
+```js
+import { isHeadingElement } from "anodum"; // or Anodum.isHeadingElement if using in browser
+
+const node = document.createElement('h1');
+
+const result = isHeadingElement(node); // result => true
+```
+
+
+### isInteractiveElement(node)
+Checks if ``node`` is an interactive element. More details [here](https://html.spec.whatwg.org/multipage/dom.html#interactive-content-2)
+
+```js
+import { isInteractiveElement } from "anodum"; // or Anodum.isInteractiveElement if using in browser
+
+const node = document.createElement('a');
+
+const result = isInteractiveElement(node); // result => true
+```
+
+
+### isNestingAllowed(element, containerElement)
+Checks if nesting ``element`` into ``containerElement`` is valid in terms of html specs. More details [here](https://html.spec.whatwg.org/multipage/dom.html#content-models)
+
+```js
+import { isNestingAllowed } from "anodum"; // or Anodum.isNestingAllowed if using in browser
+
+const containerElement = document.createElement('button');
+const element = document.createElement('div');
+
+const result = isNestingAllowed(element, containerElement); // result => false
+```
+
+
+### isNode(node)
+Checks if ``node`` is a Node.
+
+```js
+import { isNode } from "anodum"; // or Anodum.isNode if using in browser
+
+const result = isNode(document); // result => true
+
+```
+
+
+### isNonEmptyTextNode(node)
+Checks if ``node`` is a TextNode with non-empty text content.
+
+```js
+import { isNonEmptyTextNode } from "anodum"; // or Anodum.isNode if using in browser
+
+const node = document.createTextNode('text');
+
+const result = isNonEmptyTextNode(node); // result => true
+```
+
+
+### isNonEmptyTextNode(node)
+Checks if ``node`` is a TextNode with non-empty text content.
+
+```js
+import { isNonEmptyTextNode } from "anodum"; // or Anodum.isNode if using in browser
+
+const node = document.createTextNode('text');
+
+const result = isNonEmptyTextNode(node); // result => true
+```
+
+
+### isOneOfTags(element)
+Checks if ``element`` matches to one of the specified tags.
+
+```js
+import { isOneOfTags } from "anodum"; // or Anodum.isOneOfTags if using in browser
+
+const element = document.createElement('div');
+
+const result = isOneOfTags(element, ['h1', 'div'); // result => true
+```
+
+
+### isPhrasingElement(element)
+Checks if ``element`` is a phrasing Element. More details [here](https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2)
+
+```js
+import { isPhrasingElement } from "anodum"; // or Anodum.isPhrasingElement if using in browser
+
+const element = document.createElement('cite');
+
+const result = isPhrasingElement(element); // result => true
+```
+
+
+### isProcessingInstructionNode(node)
+Checks if ``node`` is a ProcessingInstructionNode.
+
+```js
+import { isProcessingInstructionNode } from "anodum"; // or Anodum.isProcessingInstructionNode if using in browser
+
+const node = document.createProcessingInstruction('xml-stylesheet', 'href="mycss.css" type="text/css"');
+
+const result = isProcessingInstructionNode(node); // result => true
+```
+
+
+### isSectioningElement(element)
+Checks if ``element`` is a sectioning element. More details [here](https://html.spec.whatwg.org/multipage/dom.html#sectioning-content-2)
+
+```js
+import { isSectioningElement } from "anodum"; // or Anodum.isSectioningElement if using in browser
+
+const element = document.createElement('section');
+
+const result = isSectioningElement(element); // result => true
+```
+
+
+### isSelfClosingElement(element)
+Checks if ``element`` is a self-closing element.
+
+```js
+import { isSelfClosingElement } from "anodum"; // or Anodum.isSelfClosingElement if using in browser
+
+const element = document.createElement('img');
+
+const result = isSelfClosingElement(element); // result => true
+```
+
+
+### isTag(element, testTag)
+Checks if ``element`` matches to specified `testTag`.
+
+```js
+import { isTag } from "anodum"; // or Anodum.isTag if using in browser
+
+const element = document.createElement('img');
+
+const result = isTag(element, 'img'); // result => true
+```
+
+
+### isTextNode(node)
+Checks if ``node`` is a TextNode.
+
+```js
+import { isTextNode } from "anodum"; // or Anodum.isTextNode if using in browser
+
+const node = document.createTextNode('');
+
+const result = isTextNode(node); // result => true
+```
+
+
+### normalizeHTML(html)
+Removes/Replaced unmaintainable symbols from target html string
+
+```js
+import { normalizeHTML } from "anodum"; // or Anodum.normalizeHTML if using in browser
+
+const html = '\n\n\n<div> test\u202F</div>\t\t\t';
+
+const result = normalizeHTML(html); // result => '<div> test </div>'
+```
+
+
+### parseDocumentFromString(html, removeComments)
+Parses target ``html`` string into Document model. If ``removeComments`` is true, all non-conditional comments will be
+removed.
+
+```js
+import { parseDocumentFromString } from "anodum"; // or Anodum.parseDocumentFromString if using in browser
+
+const html = '<!DOCTYPE html><html><head><title>test</title></head><body></body></html>';
+const dom = parseDocumentFromString(html);
+
+// dom.title => 'test'
+```
+
+
+### parseElementFromString(html)
+Parses target ``html`` string into ElementNode. ``html`` should contain a single root element, otherwise a TypeError
+will be thrown.
+
+```js
+import { parseElementFromString } from "anodum"; // or Anodum.parseElementFromString if using in browser
+
+const html = '<div></div>';
+
+const element = parseElementFromString(html);
+
+// element.tagName => 'DIV'
+```
+
+
+### removeSetOfNodes(nodes)
+Removes a set of nodes from their direct parents. After removal all sibling text nodes will be merge into single one in
+order to prevent issues with ``contenteditable`` attr.
+
+```js
+import { removeSetOfNodes } from "anodum"; // or Anodum.removeSetOfNodes if using in browser
+
+const html = '<p>paragraph1</p>hello';
+const dom = domParser.parseFromString(html, 'text/html');
+
+const nodes = [
+  dom.querySelector('p'),
+];
+
+dom.body.appendChild(document.createTextNode('world'));
+
+removeSetOfNodes(nodes);
+
+// nodes[0].parentNode => null
+// dom.body.childNodes.length => 1
+// dom.body.childNodes[0].textContent => 'helloworld'
+```
+
+
+### serializeDocument(document)
+Serializes target ``document`` into html string.
+
+```js
+import { serializeDocument } from "anodum"; // or Anodum.serializeDocument if using in browser
+
+const html = '<html class="example"></html>';
+const dom = domParser.parseFromString(html, 'text/html');
+
+const result = serializeDocument(dom);
+// result => '<html class="example"><head><title></title></head><body></body></html>'
+```
+
+
+### serializeDocumentType(document)
+Serializes doctype of target ``document`` into html string.
+
+```js
+import { serializeDocumentType } from "anodum"; // or Anodum.serializeDocumentType if using in browser
+
+const html = '<!DOCTYPE html><html><head><title>test</title></head><body></body></html>';
+const dom = domParser.parseFromString(html, 'text/html');
+
+const result = serializeDocumentType(dom); // result => '<!DOCTYPE html>'
+```
+
+
+### traverseNode(node, onStep, includePath)
+Walks trough all descendants of target node recursively. Provides specific element on each callback step.
+If ``includePath`` is true returns a path of target node as a second parameter.
+
+```js
+import { traverseNode } from "anodum"; // or Anodum.traverseNode if using in browser
+
+const element = document.createElement('div');
+element.innerHTML = '<section><!--comment--><h1></h1></section>text';
+
+traverseNode(element, (node, path) => {
+  // First callback call
+  // node => section
+  // path => [0]
+}, true);
+```
+
 
 
