@@ -1,9 +1,9 @@
-import isNode from "./is-node";
-import isTextNode from "./is-text-node";
+import isNode from './is-node';
+import isTextNode from './is-text-node';
 
 export default function (nodes) {
   if (!(nodes instanceof Array)) {
-    throw new TypeError("nodes is not an Array");
+    throw new TypeError('nodes is not an Array');
   }
 
   nodes.forEach((node) => {
@@ -11,24 +11,25 @@ export default function (nodes) {
       throw new TypeError('node is not a Node');
     }
 
-    let parentNode = node.parentNode;
+    const { parentNode } = node;
     if (!parentNode) return;
 
-    let index = Array.prototype.indexOf.call(parentNode.childNodes, node);
+    const index = Array.prototype.indexOf.call(parentNode.childNodes, node);
+
     parentNode.removeChild(node);
 
-    node = parentNode.childNodes[index];
+    const child = parentNode.childNodes[index];
 
     // Merge all heading text nodes in order to prevent contenteditable issues
-    while (isTextNode(node) && node.previousSibling && isTextNode(node.previousSibling)) {
-      node.nodeValue = node.previousSibling.nodeValue + node.nodeValue;
-      parentNode.removeChild(node.previousSibling);
+    while (isTextNode(child) && child.previousSibling && isTextNode(child.previousSibling)) {
+      child.nodeValue = child.previousSibling.nodeValue + child.nodeValue;
+      parentNode.removeChild(child.previousSibling);
     }
 
     // Merge all trailing text nodes in order to prevent contenteditable issues
-    while (isTextNode(node) && node.nextSibling && isTextNode(node.nextSibling)) {
-      node.nodeValue = node.nodeValue + node.nextSibling.nodeValue;
-      parentNode.removeChild(node.nextSibling);
+    while (isTextNode(child) && child.nextSibling && isTextNode(child.nextSibling)) {
+      child.nodeValue += child.nextSibling.nodeValue;
+      parentNode.removeChild(child.nextSibling);
     }
   });
 }

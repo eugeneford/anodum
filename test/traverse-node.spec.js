@@ -13,10 +13,10 @@ describe('traverseNode', () => {
   it('all dom nodes are reached', () => {
     const html = '<html><head></head><body></body></html>';
     const dom = domParser.parseFromString(html, 'text/html');
-    let nodes = ['HTML', 'HEAD', 'BODY'];
+    const nodes = ['HTML', 'HEAD', 'BODY'];
 
     traverseNode(dom, (node) => {
-      let index = nodes.indexOf(node.tagName);
+      const index = nodes.indexOf(node.tagName);
       nodes.splice(index, 1);
     });
 
@@ -24,11 +24,11 @@ describe('traverseNode', () => {
   });
 
   it('single node tree is passed', () => {
-    const element = document.createElement("div");
-    let nodes = ['DIV'];
+    const element = document.createElement('div');
+    const nodes = ['DIV'];
 
     traverseNode(element, (node) => {
-      let index = nodes.indexOf(node.tagName);
+      const index = nodes.indexOf(node.tagName);
       nodes.splice(index, 1);
     });
 
@@ -38,12 +38,12 @@ describe('traverseNode', () => {
   it('paths are built correctly', () => {
     const element = document.createElement('div');
     element.innerHTML = '<section><!--comment--><h1></h1></section>text';
-    let paths = {
+    const paths = {
       DIV: '0',
       SECTION: '0,0',
       comment: '0,0,0',
       H1: '0,0,1',
-      text: '0,1'
+      text: '0,1',
     };
 
     traverseNode(element, (node, path) => {
@@ -53,9 +53,9 @@ describe('traverseNode', () => {
   });
 
   it('traverse is breakable', () => {
-    let onStep = jasmine.createSpy();
+    const onStep = jasmine.createSpy();
 
-    traverseNode(document, function(){
+    traverseNode(document, () => {
       onStep();
       return true;
     });

@@ -1,12 +1,12 @@
-import domParser from "./dom-parser";
-import traverseNode from "./traverse-node";
-import isConditionalComment from "./is-conditional-comment-node";
-import isCommentNode from "./is-comment-node";
-import normalizeHTML from "./normalize-html";
+import domParser from './dom-parser';
+import traverseNode from './traverse-node';
+import isConditionalComment from './is-conditional-comment-node';
+import isCommentNode from './is-comment-node';
+import normalizeHTML from './normalize-html';
 
-export default function(html, removeComments) {
+export default function (html, removeComments) {
   const normalizedHTML = normalizeHTML(html);
-  let dom = domParser.parseFromString(normalizedHTML, "text/html");
+  const dom = domParser.parseFromString(normalizedHTML, 'text/html');
 
   if (removeComments) {
     const comments = [];
@@ -17,7 +17,7 @@ export default function(html, removeComments) {
       }
     });
 
-    comments.forEach((comment) => comment.parentNode.removeChild(comment));
+    comments.forEach(comment => comment.parentNode.removeChild(comment));
   }
 
   return dom;

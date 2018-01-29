@@ -1,20 +1,21 @@
-import nodeTypes from "./node-types";
-import xmlSerializer from "./xml-serializer";
-import isDocumentNode from "./is-document-node";
+import nodeTypes from './node-types';
+import xmlSerializer from './xml-serializer';
+import isDocumentNode from './is-document-node';
 
 export default function (node) {
   if (!isDocumentNode(node)) {
     throw new TypeError('node is not a DocumentNode');
   }
 
-  let elem = node.documentElement, html = "";
+  let elem = node.documentElement;
+  let html = '';
 
   while (elem) {
     switch (elem.nodeType) {
       case nodeTypes.ELEMENT_NODE:
         html = elem.outerHTML + html;
         break;
-      default: // Comments and other stuff
+      default:
         html = xmlSerializer.serializeToString(elem) + html;
         break;
     }

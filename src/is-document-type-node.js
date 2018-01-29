@@ -1,5 +1,5 @@
-import NodeTypes from "./node-types";
+import NodeTypes from './node-types';
 
-export default function(node){
+export default function (node) {
   return node && node.nodeType === NodeTypes.DOCUMENT_TYPE_NODE;
 }

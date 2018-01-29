@@ -1,7 +1,7 @@
-import isCommentNode from "./is-comment-node";
-import xmlSerializer from "./xml-serializer";
+import isCommentNode from './is-comment-node';
+import xmlSerializer from './xml-serializer';
 
-export default function(node){
+export default function (node) {
   if (!isCommentNode(node)) {
     return false;
   }

@@ -1,21 +1,22 @@
-import isNode from "./is-node";
+import isNode from './is-node';
 
-export default function(node, testTag){
+export default function (node, testTag) {
   if (!isNode(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
-  if (typeof testTag !== "string") {
-    throw new TypeError("testTag is not a string");
+  if (typeof testTag !== 'string') {
+    throw new TypeError('testTag is not a string');
   }
 
-  let currentNode = node;
-  let tag = testTag.toLowerCase();
+  const tag = testTag.toLowerCase();
 
-  while ((currentNode = currentNode.parentNode) && currentNode.tagName) {
+  let currentNode = node.parentNode;
+  while (currentNode && currentNode.tagName) {
     if (currentNode.tagName.toLowerCase() === tag) {
       return true;
     }
+    currentNode = currentNode.parentNode;
   }
 
   return false;

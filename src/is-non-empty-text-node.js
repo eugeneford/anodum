@@ -1,4 +1,4 @@
-import isTextNode from "./is-text-node";
+import isTextNode from './is-text-node';
 
 export default function (node) {
   if (!isTextNode(node)) {

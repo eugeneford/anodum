@@ -1,8 +1,8 @@
-import isNode from "./is-node";
+import isNode from './is-node';
 
-export default function(node) {
+export default function (node) {
   if (!isNode(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
   const path = [];

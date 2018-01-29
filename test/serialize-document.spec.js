@@ -1,12 +1,12 @@
 import domParser from '../src/dom-parser';
 import serializeDocument from '../src/serialize-document';
 
-describe('serializeDocument', ()=>{
-  it('TypeError is thrown if node is not a DocumentNode', ()=>{
-    expect(()=>serializeDocument(1)).toThrowError(TypeError);
+describe('serializeDocument', () => {
+  it('TypeError is thrown if node is not a DocumentNode', () => {
+    expect(() => serializeDocument(1)).toThrowError(TypeError);
   });
 
-  it('elements are serialized correctly ', ()=>{
+  it('elements are serialized correctly ', () => {
     const html = '<html class="example"></html>';
     const dom = domParser.parseFromString(html, 'text/html');
 
@@ -17,7 +17,7 @@ describe('serializeDocument', ()=>{
     expect(serializeDocument(dom)).toBe('<html class="example"></html>');
   });
 
-  it('comments are serialized correctly ', ()=>{
+  it('comments are serialized correctly ', () => {
     const html = '<!--Comment--><html></html>';
     const dom = domParser.parseFromString(html, 'text/html');
 
@@ -28,7 +28,7 @@ describe('serializeDocument', ()=>{
     expect(serializeDocument(dom)).toBe('<!--Comment--><html></html>');
   });
 
-  it('doctype is serialized correctly ', ()=>{
+  it('doctype is serialized correctly ', () => {
     const html = '<!DOCTYPE html><html></html>';
     const dom = domParser.parseFromString(html, 'text/html');
 

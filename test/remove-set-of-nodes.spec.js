@@ -41,7 +41,7 @@ describe('removeSetOfNodes', () => {
     const html = 'hello<p>paragraph1</p>world';
     const dom = domParser.parseFromString(html, 'text/html');
     const nodes = [
-      dom.querySelector('p')
+      dom.querySelector('p'),
     ];
 
     removeSetOfNodes(nodes);
@@ -51,17 +51,17 @@ describe('removeSetOfNodes', () => {
     });
 
     expect(dom.body.childNodes.length).toBe(1);
-    expect(dom.body.childNodes[0].textContent).toBe("helloworld");
+    expect(dom.body.childNodes[0].textContent).toBe('helloworld');
   });
 
   it('dynamically injected text nodes are merged after removal', () => {
     const html = '<p>paragraph1</p>hello';
     const dom = domParser.parseFromString(html, 'text/html');
     const nodes = [
-      dom.querySelector('p')
+      dom.querySelector('p'),
     ];
 
-    dom.body.appendChild(document.createTextNode("world"));
+    dom.body.appendChild(document.createTextNode('world'));
 
     removeSetOfNodes(nodes);
 
@@ -70,6 +70,6 @@ describe('removeSetOfNodes', () => {
     });
 
     expect(dom.body.childNodes.length).toBe(1);
-    expect(dom.body.childNodes[0].textContent).toBe("helloworld");
+    expect(dom.body.childNodes[0].textContent).toBe('helloworld');
   });
 });

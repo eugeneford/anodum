@@ -1,7 +1,7 @@
-import isNode from "./is-node";
+import isNode from './is-node';
 
 export default function (rootNode, path) {
-  if (!isNode(rootNode)){
+  if (!isNode(rootNode)) {
     throw new TypeError('rootNode is not a Node');
   }
 
@@ -10,7 +10,8 @@ export default function (rootNode, path) {
   }
 
   const pathClone = path.slice(0);
-  let c, node = rootNode;
+  let node = rootNode;
+
   pathClone.splice(0, 1);
 
   while (pathClone.length > 0) {
@@ -18,7 +19,8 @@ export default function (rootNode, path) {
       return null;
     }
 
-    c = pathClone.splice(0, 1)[0];
+    const [c] = pathClone.splice(0, 1);
+
     node = node.childNodes[c];
   }
 

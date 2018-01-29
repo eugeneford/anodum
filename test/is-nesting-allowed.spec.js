@@ -439,7 +439,7 @@ describe('isNestingAllowed', () => {
   it('"audio" can\'t contain a "source" element if src is set', () => {
     const containerElement = document.createElement('audio');
     const element = document.createElement('source');
-    containerElement.setAttribute("src", "sourcelink");
+    containerElement.setAttribute('src', 'sourcelink');
     expect(isNestingAllowed(element, containerElement)).toBe(false);
   });
 
@@ -458,7 +458,7 @@ describe('isNestingAllowed', () => {
   it('"video" can\'t contain a "source" element if src is set', () => {
     const containerElement = document.createElement('video');
     const element = document.createElement('source');
-    containerElement.setAttribute("src", "sourcelink");
+    containerElement.setAttribute('src', 'sourcelink');
     expect(isNestingAllowed(element, containerElement)).toBe(false);
   });
 

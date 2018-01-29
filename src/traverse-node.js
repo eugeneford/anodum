@@ -1,67 +1,53 @@
-import isNode from "./is-node";
-import getTreePathOfNode from "./get-tree-path-of-node";
+import isNode from './is-node';
+import getTreePathOfNode from './get-tree-path-of-node';
 
 export default function (node, onStep, includePath = false) {
   if (!isNode(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
-  if (typeof onStep !== "function") {
-    throw new TypeError("onStep is not a Function");
+  if (typeof onStep !== 'function') {
+    throw new TypeError('onStep is not a Function');
   }
 
-  let endNode = node, index = 0, path = [];
+  const rootNode = node;
+
+  let index = 0;
+  let path = [];
+  let currentNode = node;
 
   // Create path holder if includePath = true was passed
-  if (includePath) {
-    path = getTreePathOfNode(node);
-  }
+  if (includePath) path = getTreePathOfNode(rootNode);
 
-  while (node) {
-    // Going deeper
-    if (node.childNodes && node.childNodes.length > 0) {
-      node = node.firstChild;
+  while (currentNode) {
+    if (currentNode.childNodes && currentNode.childNodes.length > 0) {
+      currentNode = currentNode.firstChild;
       index = 0;
 
-      // Save Path if includePath = true was passed
-      if (includePath) {
-        path.push(index);
-      }
-    }
+      if (includePath) path.push(index);
+    } else if (currentNode.nextSibling) {
+      currentNode = currentNode.nextSibling;
 
-    // Go to next element
-    else if (node.nextSibling) {
-      node = node.nextSibling;
-
-      // Save Path if includePath = true was passed
-      if (includePath) {
-        path.push(path.pop() + 1);
-      }
-    }
-
-    // Moving back to parent
-    else {
+      if (includePath) path.push(path.pop() + 1);
+    } else {
       do {
-        if (node.parentNode) {
-          node = node.parentNode;
+        if (currentNode.parentNode) {
+          currentNode = currentNode.parentNode;
           if (includePath) path.pop();
-          if (node === endNode) {
-            onStep(node, path && path.slice(0));
+          if (currentNode === rootNode) {
+            onStep(currentNode, path && path.slice(0));
             return;
           }
         } else {
-          onStep(node, path && path.slice(0));
+          onStep(currentNode, path && path.slice(0));
           return;
         }
-      } while (!node.nextSibling);
-      node = node.nextSibling;
+      } while (!currentNode.nextSibling);
+      currentNode = currentNode.nextSibling;
 
-      // Save Path if includePath = true was passed
       if (includePath) path.push(path.pop() + 1);
     }
 
-    if (onStep(node, path && path.slice(0))) {
-      return;
-    }
+    if (onStep(currentNode, path && path.slice(0))) return;
   }
 }

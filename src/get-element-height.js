@@ -1,8 +1,8 @@
-import isElementNode from "./is-element-node";
+import isElementNode from './is-element-node';
 
 export default function (element, includeMargins) {
   if (!isElementNode(element)) {
-    throw new TypeError("element is not an ElementNode");
+    throw new TypeError('element is not an ElementNode');
   }
 
   let height = element.offsetHeight;
