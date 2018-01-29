@@ -3,7 +3,7 @@ path = require('path');
 module.exports = {
   entry: './src/index',
   output: {
-    filename: './dist/index.js',
+    filename: './dist/anodum.js',
     library: 'Anodum',
     libraryTarget: 'umd',
   },

@@ -2,7 +2,7 @@
   "name": "anodum",
   "version": "1.0.0",
   "description": "Another document utils library",
-  "main": "src/index.js",
+  "main": "dist/anodum.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/eugeneford/anodum.git"
