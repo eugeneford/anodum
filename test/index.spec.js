@@ -35,7 +35,6 @@ import {
   removeSetOfNodes,
   serializeDocument,
   serializeDocumentType,
-  traverseElement,
   traverseNode,
   xmlSerializer
 } from '../src/index';
@@ -58,6 +57,7 @@ import "./is-element-node.spec.js";
 import "./is-embed-element.spec.js";
 import "./is-heading-element.spec.js";
 import "./is-interactive-element.spec.js";
+import "./is-nesting-allowed.spec.js";
 import "./is-node.spec.js";
 import "./is-non-empty-text-node.spec.js";
 import "./is-one-of-tags.spec.js";
@@ -70,6 +70,7 @@ import "./is-text-node.spec.js";
 import "./normalize-html.spec.js";
 import "./parse-document-from-string.spec.js";
 import "./parse-element-from-string.spec.js";
+import "./remove-set-of-nodes.spec.js";
 import "./serialize-document.spec.js";
 import "./serialize-document-type.spec.js";
 import "./traverse-node.spec.js";
@@ -217,10 +218,6 @@ describe('Anodum', ()=>{
 
   it('serializeDocumentType() is defined', ()=>{
     expect(serializeDocumentType).toBeDefined();
-  });
-
-  it('traverseElement() is defined', ()=>{
-    expect(traverseElement).toBeDefined();
   });
 
   it('traverseNode() is defined', ()=>{

@@ -34,7 +34,6 @@ import parseElementFromString from "./parse-element-from-string";
 import removeSetOfNodes from "./remove-set-of-nodes";
 import serializeDocument from "./serialize-document";
 import serializeDocumentType from "./serialize-document-type";
-import traverseElement from "./traverse-element";
 import traverseNode from "./traverse-node";
 import xmlSerializer from "./xml-serializer";
 
@@ -75,7 +74,6 @@ export {
   removeSetOfNodes,
   serializeDocument,
   serializeDocumentType,
-  traverseElement,
   traverseNode,
   xmlSerializer
 };

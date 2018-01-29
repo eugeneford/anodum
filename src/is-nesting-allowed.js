@@ -15,7 +15,6 @@ export default function (element, containerElement) {
     throw new TypeError("containerElement is not a type of Element");
   }
 
-  // Try to find a special nesting rule
   switch (containerElement.tagName.toLowerCase()) {
     case "p":
     case "h1":
@@ -120,13 +119,13 @@ export default function (element, containerElement) {
       return isPhrasingElement(element) || isTag(element, "option");
 
     case "progress":
-      return isPhrasingElement(element) || isTag(element, "progress");
+      return isPhrasingElement(element) && !isTag(element, "progress");
 
     case "meter":
-      return isPhrasingElement(element) || isTag(element, "meter");
+      return isPhrasingElement(element) && !isTag(element, "meter");
 
     case "select":
-      return isOneOfTags(element, "option", "optgroup", "script", "template");
+      return isOneOfTags(element, ["option", "optgroup", "script", "template"]);
 
     case "optgroup":
       return isTag(element, "option");
