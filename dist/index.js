@@ -132,7 +132,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element, testTags) {
   if (!(testTags instanceof Array)) {
-    throw new TypeError("testTags is not an Array");
+    throw new TypeError('testTags is not an Array');
   }
 
   return testTags.findIndex(function (tag) {
@@ -174,11 +174,11 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element, testTag) {
   if (!(0, _isElementNode2.default)(element)) {
-    throw new TypeError("element is not a type of Element");
+    throw new TypeError('element is not a type of Element');
   }
 
-  if (typeof testTag !== "string") {
-    throw new TypeError("testTag is not a String");
+  if (typeof testTag !== 'string') {
+    throw new TypeError('testTag is not a String');
   }
 
   return testTag.toLowerCase() === element.tagName.toLowerCase();
@@ -277,10 +277,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (html) {
-  if (typeof html !== "string") {
-    throw new TypeError("html is not a string");
+  if (typeof html !== 'string') {
+    throw new TypeError('html is not a string');
   }
-  return html.trim().replace(/[\r\uFEFF\u2060]/g, "").replace(/[\n\t\u202F\u2007]/g, " ");
+  return html.trim().replace(/[\r\uFEFF\u2060]/g, '').replace(/[\n\t\u202F\u2007]/g, ' ');
 };
 
 /***/ }),
@@ -308,7 +308,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (node) {
   if (!(0, _isNode2.default)(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
   var path = [];
@@ -422,7 +422,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (element) {
-  return (0, _isOneOfTags2.default)(element, ["h1", "h2", "h3", "h4", "h5", "h6"]);
+  return (0, _isOneOfTags2.default)(element, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
 };
 
 var _isOneOfTags = __webpack_require__(2);
@@ -443,19 +443,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (element) {
-  if ((0, _isOneOfTags2.default)(element, ["audio", "video"])) {
-    return element.hasAttribute("controls");
+  if ((0, _isOneOfTags2.default)(element, ['audio', 'video'])) {
+    return element.hasAttribute('controls');
   }
 
-  if ((0, _isOneOfTags2.default)(element, ["img", "object"])) {
-    return element.hasAttribute("usemap");
+  if ((0, _isOneOfTags2.default)(element, ['img', 'object'])) {
+    return element.hasAttribute('usemap');
   }
 
-  if ((0, _isTag2.default)(element, "input")) {
-    return element.getAttribute("type") !== "hidden";
+  if ((0, _isTag2.default)(element, 'input')) {
+    return element.getAttribute('type') !== 'hidden';
   }
 
-  return (0, _isOneOfTags2.default)(element, ["a", "button", "embed", "iframe", "keygen", "label", "select", "textarea"]);
+  return (0, _isOneOfTags2.default)(element, ['a', 'button', 'embed', 'iframe', 'keygen', 'label', 'select', 'textarea']);
 };
 
 var _isTag = __webpack_require__(4);
@@ -480,7 +480,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (element) {
-  return (0, _isOneOfTags2.default)(element, ["a", "abbr", "audio", "b", "bdi", "bdo", "br", "button", "canvas", "cite", "code", "data", "datalist", "del", "dfn", "em", "embed", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "map", "mark", "math", "meter", "noscript", "object", "output", "progress", "q", "ruby", "s", "samp", "script", "select", "small", "span", "strong", "sub", "sup", "svg", "template", "textarea", "time", "u", "var", "video"]);
+  return (0, _isOneOfTags2.default)(element, ['a', 'abbr', 'audio', 'b', 'bdi', 'bdo', 'br', 'button', 'canvas', 'cite', 'code', 'data', 'datalist', 'del', 'dfn', 'em', 'embed', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'map', 'mark', 'math', 'meter', 'noscript', 'object', 'output', 'progress', 'q', 'ruby', 's', 'samp', 'script', 'select', 'small', 'span', 'strong', 'sub', 'sup', 'svg', 'template', 'textarea', 'time', 'u', 'var', 'video']);
 };
 
 var _isOneOfTags = __webpack_require__(2);
@@ -501,7 +501,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (element) {
-  return (0, _isOneOfTags2.default)(element, ["article", "aside", "nav", "section"]);
+  return (0, _isOneOfTags2.default)(element, ['article', 'aside', 'nav', 'section']);
 };
 
 var _isOneOfTags = __webpack_require__(2);
@@ -525,68 +525,52 @@ exports.default = function (node, onStep) {
   var includePath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if (!(0, _isNode2.default)(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
-  if (typeof onStep !== "function") {
-    throw new TypeError("onStep is not a Function");
+  if (typeof onStep !== 'function') {
+    throw new TypeError('onStep is not a Function');
   }
 
-  var endNode = node,
-      index = 0,
-      path = [];
+  var rootNode = node;
+
+  var index = 0;
+  var path = [];
+  var currentNode = node;
 
   // Create path holder if includePath = true was passed
-  if (includePath) {
-    path = (0, _getTreePathOfNode2.default)(node);
-  }
+  if (includePath) path = (0, _getTreePathOfNode2.default)(rootNode);
 
-  while (node) {
-    // Going deeper
-    if (node.childNodes && node.childNodes.length > 0) {
-      node = node.firstChild;
+  while (currentNode) {
+    if (currentNode.childNodes && currentNode.childNodes.length > 0) {
+      currentNode = currentNode.firstChild;
       index = 0;
 
-      // Save Path if includePath = true was passed
-      if (includePath) {
-        path.push(index);
-      }
+      if (includePath) path.push(index);
+    } else if (currentNode.nextSibling) {
+      currentNode = currentNode.nextSibling;
+
+      if (includePath) path.push(path.pop() + 1);
+    } else {
+      do {
+        if (currentNode.parentNode) {
+          currentNode = currentNode.parentNode;
+          if (includePath) path.pop();
+          if (currentNode === rootNode) {
+            onStep(currentNode, path && path.slice(0));
+            return;
+          }
+        } else {
+          onStep(currentNode, path && path.slice(0));
+          return;
+        }
+      } while (!currentNode.nextSibling);
+      currentNode = currentNode.nextSibling;
+
+      if (includePath) path.push(path.pop() + 1);
     }
 
-    // Go to next element
-    else if (node.nextSibling) {
-        node = node.nextSibling;
-
-        // Save Path if includePath = true was passed
-        if (includePath) {
-          path.push(path.pop() + 1);
-        }
-      }
-
-      // Moving back to parent
-      else {
-          do {
-            if (node.parentNode) {
-              node = node.parentNode;
-              if (includePath) path.pop();
-              if (node === endNode) {
-                onStep(node, path && path.slice(0));
-                return;
-              }
-            } else {
-              onStep(node, path && path.slice(0));
-              return;
-            }
-          } while (!node.nextSibling);
-          node = node.nextSibling;
-
-          // Save Path if includePath = true was passed
-          if (includePath) path.push(path.pop() + 1);
-        }
-
-    if (onStep(node, path && path.slice(0))) {
-      return;
-    }
+    if (onStep(currentNode, path && path.slice(0))) return;
   }
 };
 
@@ -606,11 +590,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 "use strict";
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.xmlSerializer = exports.traverseNode = exports.serializeDocumentType = exports.serializeDocument = exports.removeSetOfNodes = exports.parseElementFromString = exports.parseDocumentFromString = exports.normalizeHTML = exports.nodeTypes = exports.isTextNode = exports.isTag = exports.isSelfClosingElement = exports.isSectioningElement = exports.isProcessingInstructionNode = exports.isPhrasingElement = exports.isOneOfTags = exports.isNonEmptyTextNode = exports.isNode = exports.isNestingAllowed = exports.isInteractiveElement = exports.isHeadingElement = exports.isEmbedElement = exports.isElementNode = exports.isDocumentTypeNode = exports.isDocumentNode = exports.isDocumentFragmentNode = exports.isConditionalCommentNode = exports.isCommentNode = exports.isChildOfTag = exports.isChildOfElement = exports.isAttributeNode = exports.hasNonEmptyShallowTextNodes = exports.hasNonEmptyPseudoElements = exports.getTreePathOfNode = exports.getNodeByTreePath = exports.getElementHeight = exports.domParser = exports.copyElementAttributes = undefined;
 
 var _copyElementAttributes = __webpack_require__(21);
 
@@ -766,44 +745,46 @@ var _xmlSerializer2 = _interopRequireDefault(_xmlSerializer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.copyElementAttributes = _copyElementAttributes2.default;
-exports.domParser = _domParser2.default;
-exports.getElementHeight = _getElementHeight2.default;
-exports.getNodeByTreePath = _getNodeByTreePath2.default;
-exports.getTreePathOfNode = _getTreePathOfNode2.default;
-exports.hasNonEmptyPseudoElements = _hasNonEmptyPseudoElements2.default;
-exports.hasNonEmptyShallowTextNodes = _hasNonEmptyShallowTextNodes2.default;
-exports.isAttributeNode = _isAttributeNode2.default;
-exports.isChildOfElement = _isChildOfElement2.default;
-exports.isChildOfTag = _isChildOfTag2.default;
-exports.isCommentNode = _isCommentNode2.default;
-exports.isConditionalCommentNode = _isConditionalCommentNode2.default;
-exports.isDocumentFragmentNode = _isDocumentFragmentNode2.default;
-exports.isDocumentNode = _isDocumentNode2.default;
-exports.isDocumentTypeNode = _isDocumentTypeNode2.default;
-exports.isElementNode = _isElementNode2.default;
-exports.isEmbedElement = _isEmbedElement2.default;
-exports.isHeadingElement = _isHeadingElement2.default;
-exports.isInteractiveElement = _isInteractiveElement2.default;
-exports.isNestingAllowed = _isNestingAllowed2.default;
-exports.isNode = _isNode2.default;
-exports.isNonEmptyTextNode = _isNonEmptyTextNode2.default;
-exports.isOneOfTags = _isOneOfTags2.default;
-exports.isPhrasingElement = _isPhrasingElement2.default;
-exports.isProcessingInstructionNode = _isProcessingInstructionNode2.default;
-exports.isSectioningElement = _isSectioningElement2.default;
-exports.isSelfClosingElement = _isSelfClosingElement2.default;
-exports.isTag = _isTag2.default;
-exports.isTextNode = _isTextNode2.default;
-exports.nodeTypes = _nodeTypes2.default;
-exports.normalizeHTML = _normalizeHtml2.default;
-exports.parseDocumentFromString = _parseDocumentFromString2.default;
-exports.parseElementFromString = _parseElementFromString2.default;
-exports.removeSetOfNodes = _removeSetOfNodes2.default;
-exports.serializeDocument = _serializeDocument2.default;
-exports.serializeDocumentType = _serializeDocumentType2.default;
-exports.traverseNode = _traverseNode2.default;
-exports.xmlSerializer = _xmlSerializer2.default;
+module.exports = {
+  copyElementAttributes: _copyElementAttributes2.default,
+  domParser: _domParser2.default,
+  getElementHeight: _getElementHeight2.default,
+  getNodeByTreePath: _getNodeByTreePath2.default,
+  getTreePathOfNode: _getTreePathOfNode2.default,
+  hasNonEmptyPseudoElements: _hasNonEmptyPseudoElements2.default,
+  hasNonEmptyShallowTextNodes: _hasNonEmptyShallowTextNodes2.default,
+  isAttributeNode: _isAttributeNode2.default,
+  isChildOfElement: _isChildOfElement2.default,
+  isChildOfTag: _isChildOfTag2.default,
+  isCommentNode: _isCommentNode2.default,
+  isConditionalCommentNode: _isConditionalCommentNode2.default,
+  isDocumentFragmentNode: _isDocumentFragmentNode2.default,
+  isDocumentNode: _isDocumentNode2.default,
+  isDocumentTypeNode: _isDocumentTypeNode2.default,
+  isElementNode: _isElementNode2.default,
+  isEmbedElement: _isEmbedElement2.default,
+  isHeadingElement: _isHeadingElement2.default,
+  isInteractiveElement: _isInteractiveElement2.default,
+  isNestingAllowed: _isNestingAllowed2.default,
+  isNode: _isNode2.default,
+  isNonEmptyTextNode: _isNonEmptyTextNode2.default,
+  isOneOfTags: _isOneOfTags2.default,
+  isPhrasingElement: _isPhrasingElement2.default,
+  isProcessingInstructionNode: _isProcessingInstructionNode2.default,
+  isSectioningElement: _isSectioningElement2.default,
+  isSelfClosingElement: _isSelfClosingElement2.default,
+  isTag: _isTag2.default,
+  isTextNode: _isTextNode2.default,
+  nodeTypes: _nodeTypes2.default,
+  normalizeHTML: _normalizeHtml2.default,
+  parseDocumentFromString: _parseDocumentFromString2.default,
+  parseElementFromString: _parseElementFromString2.default,
+  removeSetOfNodes: _removeSetOfNodes2.default,
+  serializeDocument: _serializeDocument2.default,
+  serializeDocumentType: _serializeDocumentType2.default,
+  traverseNode: _traverseNode2.default,
+  xmlSerializer: _xmlSerializer2.default
+};
 
 /***/ }),
 /* 21 */
@@ -818,16 +799,15 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element, targetElement) {
   if (!(0, _isElementNode2.default)(element)) {
-    throw new TypeError("element is not an ElementNode");
+    throw new TypeError('element is not an ElementNode');
   }
 
   if (!(0, _isElementNode2.default)(targetElement)) {
-    throw new TypeError("targetElement is not an ElementNode");
+    throw new TypeError('targetElement is not an ElementNode');
   }
 
-  var i = void 0,
-      attribute = void 0;
-  for (i = 0; i < element.attributes.length; i++) {
+  var attribute = void 0;
+  for (var i = 0; i < element.attributes.length; i += 1) {
     attribute = element.attributes[i];
     targetElement.setAttribute(attribute.name, attribute.value);
   }
@@ -852,7 +832,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element, includeMargins) {
   if (!(0, _isElementNode2.default)(element)) {
-    throw new TypeError("element is not an ElementNode");
+    throw new TypeError('element is not an ElementNode');
   }
 
   var height = element.offsetHeight;
@@ -882,6 +862,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 exports.default = function (rootNode, path) {
   if (!(0, _isNode2.default)(rootNode)) {
     throw new TypeError('rootNode is not a Node');
@@ -892,8 +874,8 @@ exports.default = function (rootNode, path) {
   }
 
   var pathClone = path.slice(0);
-  var c = void 0,
-      node = rootNode;
+  var node = rootNode;
+
   pathClone.splice(0, 1);
 
   while (pathClone.length > 0) {
@@ -901,7 +883,10 @@ exports.default = function (rootNode, path) {
       return null;
     }
 
-    c = pathClone.splice(0, 1)[0];
+    var _pathClone$splice = pathClone.splice(0, 1),
+        _pathClone$splice2 = _slicedToArray(_pathClone$splice, 1),
+        c = _pathClone$splice2[0];
+
     node = node.childNodes[c];
   }
 
@@ -927,12 +912,12 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element) {
   if (!(0, _isElementNode2.default)(element)) {
-    throw new TypeError("element is not a ElementNode");
+    throw new TypeError('element is not a ElementNode');
   }
 
   var window = element.ownerDocument.defaultView;
-  var cssBefore = window.getComputedStyle(element, ':before').getPropertyValue("content");
-  var cssAfter = window.getComputedStyle(element, ':after').getPropertyValue("content");
+  var cssBefore = window.getComputedStyle(element, ':before').getPropertyValue('content');
+  var cssAfter = window.getComputedStyle(element, ':after').getPropertyValue('content');
 
   return cssBefore.length > 0 || cssAfter.length > 0;
 };
@@ -956,15 +941,14 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element) {
   if (!(0, _isElementNode2.default)(element)) {
-    throw new TypeError("element is not an Element");
+    throw new TypeError('element is not an Element');
   }
 
   if (!element.hasChildNodes()) {
     return false;
   }
 
-  var i = void 0;
-  for (i = 0; i < element.childNodes.length; i++) {
+  for (var i = 0; i < element.childNodes.length; i += 1) {
     if ((0, _isNonEmptyTextNode2.default)(element.childNodes[i])) {
       return true;
     }
@@ -1017,19 +1001,20 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (node, testElement) {
   if (!(0, _isNode2.default)(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
   if (!(0, _isElementNode2.default)(testElement)) {
-    throw new TypeError("testElement is not an Element");
+    throw new TypeError('testElement is not an Element');
   }
 
-  var currentNode = node;
+  var currentNode = node.parentElement;
 
-  while (currentNode = currentNode.parentElement) {
+  while (currentNode) {
     if (currentNode === testElement) {
       return true;
     }
+    currentNode = currentNode.parentElement;
   }
 
   return false;
@@ -1058,20 +1043,21 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (node, testTag) {
   if (!(0, _isNode2.default)(node)) {
-    throw new TypeError("node is not a Node");
+    throw new TypeError('node is not a Node');
   }
 
-  if (typeof testTag !== "string") {
-    throw new TypeError("testTag is not a string");
+  if (typeof testTag !== 'string') {
+    throw new TypeError('testTag is not a string');
   }
 
-  var currentNode = node;
   var tag = testTag.toLowerCase();
 
-  while ((currentNode = currentNode.parentNode) && currentNode.tagName) {
+  var currentNode = node.parentNode;
+  while (currentNode && currentNode.tagName) {
     if (currentNode.tagName.toLowerCase() === tag) {
       return true;
     }
+    currentNode = currentNode.parentNode;
   }
 
   return false;
@@ -1116,7 +1102,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (element) {
-  return (0, _isOneOfTags2.default)(element, ["audio", "canvas", "embed", "iframe", "img", "math", "object", "svg", "video"]);
+  return (0, _isOneOfTags2.default)(element, ['audio', 'canvas', 'embed', 'iframe', 'img', 'math', 'object', 'svg', 'video']);
 };
 
 var _isOneOfTags = __webpack_require__(2);
@@ -1138,149 +1124,152 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (element, containerElement) {
   if (!(0, _isElementNode2.default)(element)) {
-    throw new TypeError("element is not a type of Element");
+    throw new TypeError('element is not a type of Element');
   }
 
   if (!(0, _isElementNode2.default)(containerElement)) {
-    throw new TypeError("containerElement is not a type of Element");
+    throw new TypeError('containerElement is not a type of Element');
   }
 
   switch (containerElement.tagName.toLowerCase()) {
-    case "p":
-    case "h1":
-    case "h2":
-    case "h3":
-    case "h4":
-    case "h5":
-    case "h6":
-    case "pre":
-    case "em":
-    case "strong":
-    case "small":
-    case "s":
-    case "cite":
-    case "q":
-    case "abbr":
-    case "data":
-    case "time":
-    case "code":
-    case "var":
-    case "samp":
-    case "kbd":
-    case "sub":
-    case "sup":
-    case "i":
-    case "b":
-    case "u":
-    case "mark":
-    case "bdi":
-    case "bdo":
-    case "span":
-    case "output":
-    case "legend":
+    case 'p':
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6':
+    case 'pre':
+    case 'em':
+    case 'strong':
+    case 'small':
+    case 's':
+    case 'cite':
+    case 'q':
+    case 'abbr':
+    case 'data':
+    case 'time':
+    case 'code':
+    case 'var':
+    case 'samp':
+    case 'kbd':
+    case 'sub':
+    case 'sup':
+    case 'i':
+    case 'b':
+    case 'u':
+    case 'mark':
+    case 'bdi':
+    case 'bdo':
+    case 'span':
+    case 'output':
+    case 'legend':
       return (0, _isPhrasingElement2.default)(element);
 
-    case "dfn":
-      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, "dfn");
+    case 'dfn':
+      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, 'dfn');
 
-    case "object":
-      return (0, _isTag2.default)(element, "param");
+    case 'object':
+      return (0, _isTag2.default)(element, 'param');
 
-    case "audio":
-    case "video":
-      if (containerElement.hasAttribute("src")) return (0, _isTag2.default)(element, "track");else return (0, _isOneOfTags2.default)(element, ["source", "track"]);
+    case 'audio':
+    case 'video':
+      if (containerElement.hasAttribute('src')) {
+        return (0, _isTag2.default)(element, 'track');
+      }
+      return (0, _isOneOfTags2.default)(element, ['source', 'track']);
 
-    case "html":
-      return (0, _isOneOfTags2.default)(element, ["head", "body"]);
+    case 'html':
+      return (0, _isOneOfTags2.default)(element, ['head', 'body']);
 
-    case "nav":
-    case "aside":
-      return !(0, _isTag2.default)(element, "main");
+    case 'nav':
+    case 'aside':
+      return !(0, _isTag2.default)(element, 'main');
 
-    case "ol":
-    case "ul":
-      return (0, _isTag2.default)(element, "li");
+    case 'ol':
+    case 'ul':
+      return (0, _isTag2.default)(element, 'li');
 
-    case "dt":
-      return !(0, _isOneOfTags2.default)(element, ["header", "footer"]) && !(0, _isSectioningElement2.default)(element) && !(0, _isHeadingElement2.default)(element);
+    case 'dt':
+      return !(0, _isOneOfTags2.default)(element, ['header', 'footer']) && !(0, _isSectioningElement2.default)(element) && !(0, _isHeadingElement2.default)(element);
 
-    case "dl":
-      return (0, _isOneOfTags2.default)(element, ["dt", "dd"]);
+    case 'dl':
+      return (0, _isOneOfTags2.default)(element, ['dt', 'dd']);
 
-    case "header":
-    case "footer":
-      return !(0, _isOneOfTags2.default)(element, ["main", "header", "footer"]);
+    case 'header':
+    case 'footer':
+      return !(0, _isOneOfTags2.default)(element, ['main', 'header', 'footer']);
 
-    case "address":
-      return !(0, _isOneOfTags2.default)(element, ["address", "header", "footer"]) && !(0, _isHeadingElement2.default)(element) && !(0, _isSectioningElement2.default)(element);
+    case 'address':
+      return !(0, _isOneOfTags2.default)(element, ['address', 'header', 'footer']) && !(0, _isHeadingElement2.default)(element) && !(0, _isSectioningElement2.default)(element);
 
-    case "hr":
-    case "img":
-    case "iframe":
-    case "embed":
-    case "param":
-    case "source":
-    case "track":
-    case "area":
-    case "title":
-    case "base":
-    case "link":
-    case "meta":
-    case "style":
-    case "wbr":
-    case "br":
-    case "col":
-    case "script":
-    case "template":
-    case "canvas":
-    case "input":
-    case "textarea":
-    case "keygen":
+    case 'hr':
+    case 'img':
+    case 'iframe':
+    case 'embed':
+    case 'param':
+    case 'source':
+    case 'track':
+    case 'area':
+    case 'title':
+    case 'base':
+    case 'link':
+    case 'meta':
+    case 'style':
+    case 'wbr':
+    case 'br':
+    case 'col':
+    case 'script':
+    case 'template':
+    case 'canvas':
+    case 'input':
+    case 'textarea':
+    case 'keygen':
       return false;
 
-    case "form":
-      return !(0, _isTag2.default)(element, "form");
+    case 'form':
+      return !(0, _isTag2.default)(element, 'form');
 
-    case "label":
-      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, "label");
+    case 'label':
+      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, 'label');
 
-    case "datalist":
-      return (0, _isPhrasingElement2.default)(element) || (0, _isTag2.default)(element, "option");
+    case 'datalist':
+      return (0, _isPhrasingElement2.default)(element) || (0, _isTag2.default)(element, 'option');
 
-    case "progress":
-      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, "progress");
+    case 'progress':
+      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, 'progress');
 
-    case "meter":
-      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, "meter");
+    case 'meter':
+      return (0, _isPhrasingElement2.default)(element) && !(0, _isTag2.default)(element, 'meter');
 
-    case "select":
-      return (0, _isOneOfTags2.default)(element, ["option", "optgroup", "script", "template"]);
+    case 'select':
+      return (0, _isOneOfTags2.default)(element, ['option', 'optgroup', 'script', 'template']);
 
-    case "optgroup":
-      return (0, _isTag2.default)(element, "option");
+    case 'optgroup':
+      return (0, _isTag2.default)(element, 'option');
 
-    case "button":
+    case 'button':
       return (0, _isPhrasingElement2.default)(element) && !(0, _isInteractiveElement2.default)(element);
 
-    case "a":
+    case 'a':
       return !(0, _isInteractiveElement2.default)(element);
 
-    case "tbody":
-    case "thead":
-    case "tfoot":
-      return (0, _isOneOfTags2.default)(element, ["tr", "script", "template"]);
+    case 'tbody':
+    case 'thead':
+    case 'tfoot':
+      return (0, _isOneOfTags2.default)(element, ['tr', 'script', 'template']);
 
-    case "caption":
-      return !(0, _isTag2.default)(element, "table");
+    case 'caption':
+      return !(0, _isTag2.default)(element, 'table');
 
-    case "tr":
-      return (0, _isOneOfTags2.default)(element, ["td", "th", "script", "template"]);
+    case 'tr':
+      return (0, _isOneOfTags2.default)(element, ['td', 'th', 'script', 'template']);
 
-    case "th":
-      return !(0, _isOneOfTags2.default)(element, ["header", "footer"]) && !(0, _isSectioningElement2.default)(element) && !(0, _isHeadingElement2.default)(element);
+    case 'th':
+      return !(0, _isOneOfTags2.default)(element, ['header', 'footer']) && !(0, _isSectioningElement2.default)(element) && !(0, _isHeadingElement2.default)(element);
 
-    case "table":
-      return (0, _isOneOfTags2.default)(element, ["caption", "colgroup", "thead", "tfoot", "tbody", "tr", "script", "template"]);
+    case 'table':
+      return (0, _isOneOfTags2.default)(element, ['caption', 'colgroup', 'thead', 'tfoot', 'tbody', 'tr', 'script', 'template']);
     default:
       return true;
   }
@@ -1349,7 +1338,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (element) {
-  return (0, _isOneOfTags2.default)(element, ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]);
+  return (0, _isOneOfTags2.default)(element, ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
 };
 
 var _isOneOfTags = __webpack_require__(2);
@@ -1371,7 +1360,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (html, removeComments) {
   var normalizedHTML = (0, _normalizeHtml2.default)(html);
-  var dom = _domParser2.default.parseFromString(normalizedHTML, "text/html");
+  var dom = _domParser2.default.parseFromString(normalizedHTML, 'text/html');
 
   if (removeComments) {
     var comments = [];
@@ -1425,12 +1414,12 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (html) {
   var normalizedHTML = (0, _normalizeHtml2.default)(html);
-  var container = document.createElement("div");
+  var container = document.createElement('div');
 
   container.innerHTML = normalizedHTML;
 
   if (container.children.length !== 1) {
-    throw new EvalError("html should contain a single root element");
+    throw new EvalError('html should contain a single root element');
   }
 
   return container.firstElementChild;
@@ -1455,7 +1444,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (nodes) {
   if (!(nodes instanceof Array)) {
-    throw new TypeError("nodes is not an Array");
+    throw new TypeError('nodes is not an Array');
   }
 
   nodes.forEach(function (node) {
@@ -1464,23 +1453,25 @@ exports.default = function (nodes) {
     }
 
     var parentNode = node.parentNode;
+
     if (!parentNode) return;
 
     var index = Array.prototype.indexOf.call(parentNode.childNodes, node);
+
     parentNode.removeChild(node);
 
-    node = parentNode.childNodes[index];
+    var child = parentNode.childNodes[index];
 
     // Merge all heading text nodes in order to prevent contenteditable issues
-    while ((0, _isTextNode2.default)(node) && node.previousSibling && (0, _isTextNode2.default)(node.previousSibling)) {
-      node.nodeValue = node.previousSibling.nodeValue + node.nodeValue;
-      parentNode.removeChild(node.previousSibling);
+    while ((0, _isTextNode2.default)(child) && child.previousSibling && (0, _isTextNode2.default)(child.previousSibling)) {
+      child.nodeValue = child.previousSibling.nodeValue + child.nodeValue;
+      parentNode.removeChild(child.previousSibling);
     }
 
     // Merge all trailing text nodes in order to prevent contenteditable issues
-    while ((0, _isTextNode2.default)(node) && node.nextSibling && (0, _isTextNode2.default)(node.nextSibling)) {
-      node.nodeValue = node.nodeValue + node.nextSibling.nodeValue;
-      parentNode.removeChild(node.nextSibling);
+    while ((0, _isTextNode2.default)(child) && child.nextSibling && (0, _isTextNode2.default)(child.nextSibling)) {
+      child.nodeValue += child.nextSibling.nodeValue;
+      parentNode.removeChild(child.nextSibling);
     }
   });
 };
@@ -1511,8 +1502,8 @@ exports.default = function (node) {
     throw new TypeError('node is not a DocumentNode');
   }
 
-  var elem = node.documentElement,
-      html = "";
+  var elem = node.documentElement;
+  var html = '';
 
   while (elem) {
     switch (elem.nodeType) {
@@ -1520,7 +1511,6 @@ exports.default = function (node) {
         html = elem.outerHTML + html;
         break;
       default:
-        // Comments and other stuff
         html = _xmlSerializer2.default.serializeToString(elem) + html;
         break;
     }
@@ -1562,8 +1552,11 @@ exports.default = function (node) {
   }
 
   var doctype = (0, _isDocumentNode2.default)(node) ? node.doctype : node;
+  var publicId = doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '';
+  var systemTerm = !doctype.publicId && doctype.systemId ? ' SYSTEM' : '';
+  var systemId = doctype.systemId ? ' "' + doctype.systemId + '"' : '';
 
-  return '<!DOCTYPE ' + doctype.name + (doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '') + (!doctype.publicId && doctype.systemId ? ' SYSTEM' : '') + (doctype.systemId ? ' "' + doctype.systemId + '"' : '') + '>';
+  return '<!DOCTYPE ' + doctype.name + publicId + systemTerm + systemId + '>';
 };
 
 var _isDocumentNode = __webpack_require__(8);
@@ -1577,5 +1570,5 @@ var _isDocumentTypeNode2 = _interopRequireDefault(_isDocumentTypeNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ })
-/******/ ])["default"];
+/******/ ]);
 });

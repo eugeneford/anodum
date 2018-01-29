@@ -6,7 +6,6 @@ module.exports = {
     filename: './dist/index.js',
     library: 'Anodum',
     libraryTarget: 'umd',
-    libraryExport: 'default',
   },
 
   module: {

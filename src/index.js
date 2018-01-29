@@ -37,7 +37,7 @@ import serializeDocumentType from './serialize-document-type';
 import traverseNode from './traverse-node';
 import xmlSerializer from './xml-serializer';
 
-export {
+module.exports = {
   copyElementAttributes,
   domParser,
   getElementHeight,
