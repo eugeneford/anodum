@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/index',
   output: {
     filename: './dist/anodum.js',
-    library: 'Anodum',
+    library: 'anodum',
     libraryTarget: 'umd',
   },
 
