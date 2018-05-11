@@ -447,6 +447,14 @@ const node = document.createTextNode('');
 const result = isTextNode(node); // result => true
 ```
 
+### isValidSelector(cssSelector)
+Checks if ``cssSelector`` is valid.
+
+```js
+import { isValidSelector } from "anodum"; // or anodum.isValidSelector if using in browser
+
+const result = isValidSelector('div'); // result => true
+```
 
 ### normalizeHTML(html)
 Removes/Replaced unmaintainable symbols from target html string
