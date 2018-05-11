@@ -707,6 +707,10 @@ var _isTextNode = __webpack_require__(5);
 
 var _isTextNode2 = _interopRequireDefault(_isTextNode);
 
+var _isValidSelector = __webpack_require__(34);
+
+var _isValidSelector2 = _interopRequireDefault(_isValidSelector);
+
 var _nodeTypes = __webpack_require__(0);
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
@@ -715,23 +719,23 @@ var _normalizeHtml = __webpack_require__(9);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
-var _parseDocumentFromString = __webpack_require__(34);
+var _parseDocumentFromString = __webpack_require__(35);
 
 var _parseDocumentFromString2 = _interopRequireDefault(_parseDocumentFromString);
 
-var _parseElementFromString = __webpack_require__(35);
+var _parseElementFromString = __webpack_require__(36);
 
 var _parseElementFromString2 = _interopRequireDefault(_parseElementFromString);
 
-var _removeSetOfNodes = __webpack_require__(36);
+var _removeSetOfNodes = __webpack_require__(37);
 
 var _removeSetOfNodes2 = _interopRequireDefault(_removeSetOfNodes);
 
-var _serializeDocument = __webpack_require__(37);
+var _serializeDocument = __webpack_require__(38);
 
 var _serializeDocument2 = _interopRequireDefault(_serializeDocument);
 
-var _serializeDocumentType = __webpack_require__(38);
+var _serializeDocumentType = __webpack_require__(39);
 
 var _serializeDocumentType2 = _interopRequireDefault(_serializeDocumentType);
 
@@ -775,6 +779,7 @@ module.exports = {
   isSelfClosingElement: _isSelfClosingElement2.default,
   isTag: _isTag2.default,
   isTextNode: _isTextNode2.default,
+  isValidSelector: _isValidSelector2.default,
   nodeTypes: _nodeTypes2.default,
   normalizeHTML: _normalizeHtml2.default,
   parseDocumentFromString: _parseDocumentFromString2.default,
@@ -1358,6 +1363,28 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+exports.default = function (selector) {
+  try {
+    testDiv.querySelector(selector);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
+var testDiv = document.createElement('div');
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 exports.default = function (html, removeComments) {
   var normalizedHTML = (0, _normalizeHtml2.default)(html);
   var dom = _domParser2.default.parseFromString(normalizedHTML, 'text/html');
@@ -1402,7 +1429,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1432,7 +1459,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1487,7 +1514,7 @@ var _isTextNode2 = _interopRequireDefault(_isTextNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1536,7 +1563,7 @@ var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

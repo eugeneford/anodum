@@ -28,6 +28,7 @@ import {
   isSelfClosingElement,
   isTag,
   isTextNode,
+  isValidSelector,
   nodeTypes,
   normalizeHTML,
   parseDocumentFromString,
@@ -67,6 +68,7 @@ import './is-sectioning-element.spec';
 import './is-self-closing-element.spec';
 import './is-tag.spec';
 import './is-text-node.spec';
+import './is-valid-selector.spec';
 import './normalize-html.spec';
 import './parse-document-from-string.spec';
 import './parse-element-from-string.spec';
@@ -190,6 +192,10 @@ describe('Anodum', () => {
 
   it('isTextNode() is defined', () => {
     expect(isTextNode).toBeDefined();
+  });
+
+  it('isValidSelector() is defined', () => {
+    expect(isValidSelector).toBeDefined();
   });
 
   it('nodeTypes is defined', () => {

@@ -27,6 +27,7 @@ import isSectioningElement from './is-sectioning-element';
 import isSelfClosingElement from './is-self-closing-element';
 import isTag from './is-tag';
 import isTextNode from './is-text-node';
+import isValidSelector from './is-valid-selector';
 import nodeTypes from './node-types';
 import normalizeHTML from './normalize-html';
 import parseDocumentFromString from './parse-document-from-string';
@@ -67,6 +68,7 @@ module.exports = {
   isSelfClosingElement,
   isTag,
   isTextNode,
+  isValidSelector,
   nodeTypes,
   normalizeHTML,
   parseDocumentFromString,
