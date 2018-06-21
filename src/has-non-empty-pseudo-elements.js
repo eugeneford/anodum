@@ -6,6 +6,8 @@ export default function (element) {
   }
 
   const window = element.ownerDocument.defaultView;
+  if (!window) return false; // document has no render tree
+
   const cssBefore = window.getComputedStyle(element, ':before').getPropertyValue('content');
   const cssAfter = window.getComputedStyle(element, ':after').getPropertyValue('content');
 

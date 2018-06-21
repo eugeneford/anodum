@@ -30,6 +30,11 @@ export default function (node, onStep, includePath = false) {
 
       if (includePath) path.push(path.pop() + 1);
     } else {
+      if (currentNode === rootNode) {
+        onStep(currentNode, path && path.slice(0));
+        return;
+      }
+
       do {
         if (currentNode.parentNode) {
           currentNode = currentNode.parentNode;

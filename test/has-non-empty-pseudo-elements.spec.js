@@ -34,12 +34,11 @@ describe('hasNonEmptyPseudoElements', () => {
   });
 
   it('false for element without pseudo element', () => {
-    const element = document.createElement('div');
+    const htmlDocument = document.implementation.createHTMLDocument();
+    const element = htmlDocument.createElement('div');
 
-    document.body.appendChild(element);
+    htmlDocument.body.appendChild(element);
 
     expect(hasNonEmptyPseudoElements(element)).toBe(false);
-
-    document.body.removeChild(element);
   });
 });

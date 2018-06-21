@@ -35,6 +35,14 @@ describe('traverseNode', () => {
     expect(nodes.length).toBe(0);
   });
 
+  it('childless node is reached', () => {
+    const htmlDocument = document.implementation.createHTMLDocument();
+
+    traverseNode(htmlDocument.body, (node) => {
+      expect(node).toBe(htmlDocument.body);
+    });
+  });
+
   it('paths are built correctly', () => {
     const element = document.createElement('div');
     element.innerHTML = '<section><!--comment--><h1></h1></section>text';

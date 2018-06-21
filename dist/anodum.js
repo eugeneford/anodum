@@ -552,6 +552,11 @@ exports.default = function (node, onStep) {
 
       if (includePath) path.push(path.pop() + 1);
     } else {
+      if (currentNode === rootNode) {
+        onStep(currentNode, path && path.slice(0));
+        return;
+      }
+
       do {
         if (currentNode.parentNode) {
           currentNode = currentNode.parentNode;
@@ -921,6 +926,8 @@ exports.default = function (element) {
   }
 
   var window = element.ownerDocument.defaultView;
+  if (!window) return false; // document has no render tree
+
   var cssBefore = window.getComputedStyle(element, ':before').getPropertyValue('content');
   var cssAfter = window.getComputedStyle(element, ':after').getPropertyValue('content');
 
