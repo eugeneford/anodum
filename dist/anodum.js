@@ -696,11 +696,15 @@ var _isProcessingInstructionNode = __webpack_require__(32);
 
 var _isProcessingInstructionNode2 = _interopRequireDefault(_isProcessingInstructionNode);
 
+var _isSameOrContains = __webpack_require__(33);
+
+var _isSameOrContains2 = _interopRequireDefault(_isSameOrContains);
+
 var _isSectioningElement = __webpack_require__(18);
 
 var _isSectioningElement2 = _interopRequireDefault(_isSectioningElement);
 
-var _isSelfClosingElement = __webpack_require__(33);
+var _isSelfClosingElement = __webpack_require__(34);
 
 var _isSelfClosingElement2 = _interopRequireDefault(_isSelfClosingElement);
 
@@ -712,7 +716,7 @@ var _isTextNode = __webpack_require__(5);
 
 var _isTextNode2 = _interopRequireDefault(_isTextNode);
 
-var _isValidSelector = __webpack_require__(34);
+var _isValidSelector = __webpack_require__(35);
 
 var _isValidSelector2 = _interopRequireDefault(_isValidSelector);
 
@@ -724,23 +728,23 @@ var _normalizeHtml = __webpack_require__(9);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
-var _parseDocumentFromString = __webpack_require__(35);
+var _parseDocumentFromString = __webpack_require__(36);
 
 var _parseDocumentFromString2 = _interopRequireDefault(_parseDocumentFromString);
 
-var _parseElementFromString = __webpack_require__(36);
+var _parseElementFromString = __webpack_require__(37);
 
 var _parseElementFromString2 = _interopRequireDefault(_parseElementFromString);
 
-var _removeSetOfNodes = __webpack_require__(37);
+var _removeSetOfNodes = __webpack_require__(38);
 
 var _removeSetOfNodes2 = _interopRequireDefault(_removeSetOfNodes);
 
-var _serializeDocument = __webpack_require__(38);
+var _serializeDocument = __webpack_require__(39);
 
 var _serializeDocument2 = _interopRequireDefault(_serializeDocument);
 
-var _serializeDocumentType = __webpack_require__(39);
+var _serializeDocumentType = __webpack_require__(40);
 
 var _serializeDocumentType2 = _interopRequireDefault(_serializeDocumentType);
 
@@ -780,6 +784,7 @@ module.exports = {
   isOneOfTags: _isOneOfTags2.default,
   isPhrasingElement: _isPhrasingElement2.default,
   isProcessingInstructionNode: _isProcessingInstructionNode2.default,
+  isSameOrContains: _isSameOrContains2.default,
   isSectioningElement: _isSectioningElement2.default,
   isSelfClosingElement: _isSelfClosingElement2.default,
   isTag: _isTag2.default,
@@ -1349,6 +1354,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+exports.default = function (element, testElement) {
+  if (!element || !testElement) return false;
+  return element === testElement || element.contains(testElement);
+};
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 exports.default = function (element) {
   return (0, _isOneOfTags2.default)(element, ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
 };
@@ -1360,7 +1381,7 @@ var _isOneOfTags2 = _interopRequireDefault(_isOneOfTags);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1382,7 +1403,7 @@ exports.default = function (selector) {
 var testDiv = document.createElement('div');
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1436,7 +1457,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1466,7 +1487,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1521,7 +1542,7 @@ var _isTextNode2 = _interopRequireDefault(_isTextNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1570,7 +1591,7 @@ var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
