@@ -1,6 +1,6 @@
 {
   "name": "anodum",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Another document utils library",
   "main": "dist/anodum.js",
   "repository": {

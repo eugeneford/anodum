@@ -399,6 +399,21 @@ const node = document.createProcessingInstruction('xml-stylesheet', 'href="mycss
 const result = isProcessingInstructionNode(node); // result => true
 ```
 
+### isSameOrContains(element, testElement)
+
+Checks if `element` and `testElement` it the same element, or `element` contains `testElement`.
+
+```js
+const element = document.createElement('div');
+const element2 = document.createElement('div');
+
+isSameOrContains(element, element); // true
+isSameOrContains(element, element2); // false
+
+element.appendChild(element2);
+isSameOrContains(element, element2); // true
+
+```
 
 ### isSectioningElement(element)
 Checks if ``element`` is a sectioning element. More details [here](https://html.spec.whatwg.org/multipage/dom.html#sectioning-content-2)

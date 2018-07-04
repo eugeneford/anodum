@@ -24,6 +24,7 @@ import {
   isOneOfTags,
   isPhrasingElement,
   isProcessingInstructionNode,
+  isSameOrContains,
   isSectioningElement,
   isSelfClosingElement,
   isTag,
@@ -64,6 +65,7 @@ import './is-non-empty-text-node.spec';
 import './is-one-of-tags.spec';
 import './is-phrasing-element.spec';
 import './is-processing-instruction-node.spec';
+import './is-same-or-contains.spec';
 import './is-sectioning-element.spec';
 import './is-self-closing-element.spec';
 import './is-tag.spec';
@@ -180,6 +182,10 @@ describe('Anodum', () => {
 
   it('isSectioningElement() is defined', () => {
     expect(isSectioningElement).toBeDefined();
+  });
+
+  it('isSameOrContains() is defined', () => {
+    expect(isSameOrContains).toBeDefined();
   });
 
   it('isSelfClosingElement() is defined', () => {
