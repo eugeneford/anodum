@@ -23,6 +23,7 @@ import isNonEmptyTextNode from './is-non-empty-text-node';
 import isOneOfTags from './is-one-of-tags';
 import isPhrasingElement from './is-phrasing-element';
 import isProcessingInstructionNode from './is-processing-instruction-node';
+import isRenderedNode from './is-rendered-node';
 import isSameOrContains from './is-same-or-contains';
 import isSectioningElement from './is-sectioning-element';
 import isSelfClosingElement from './is-self-closing-element';
@@ -65,6 +66,7 @@ module.exports = {
   isOneOfTags,
   isPhrasingElement,
   isProcessingInstructionNode,
+  isRenderedNode,
   isSameOrContains,
   isSectioningElement,
   isSelfClosingElement,
