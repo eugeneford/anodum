@@ -399,6 +399,15 @@ const node = document.createProcessingInstruction('xml-stylesheet', 'href="mycss
 const result = isProcessingInstructionNode(node); // result => true
 ```
 
+### isRenderedNode(node)
+Checks if ``node`` is rendered.
+
+```js
+import { isRenderedNode } from "anodum"; // or anodum.isRenderedNode if using in browser
+
+const result = isRenderedNode(document.body); // result => true
+```
+
 ### isSameOrContains(element, testElement)
 
 Checks if `element` and `testElement` it the same element, or `element` contains `testElement`.
