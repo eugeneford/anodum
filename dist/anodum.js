@@ -542,40 +542,25 @@ exports.default = function (node, onStep) {
   if (includePath) path = (0, _getTreePathOfNode2.default)(rootNode);
 
   while (currentNode) {
-    if (currentNode.childNodes && currentNode.childNodes.length > 0) {
+    if (onStep(currentNode, path)) return;
+
+    if (currentNode.firstChild) {
       currentNode = currentNode.firstChild;
       index = 0;
-
       if (includePath) path.push(index);
     } else if (currentNode.nextSibling) {
       currentNode = currentNode.nextSibling;
-
       if (includePath) path.push(path.pop() + 1);
     } else {
-      if (currentNode === rootNode) {
-        onStep(currentNode, path && path.slice(0));
-        return;
+      while (!currentNode.nextSibling) {
+        if (currentNode === rootNode) return;
+        currentNode = currentNode.parentNode;
+        if (includePath) path.pop();
       }
 
-      do {
-        if (currentNode.parentNode) {
-          currentNode = currentNode.parentNode;
-          if (includePath) path.pop();
-          if (currentNode === rootNode) {
-            onStep(currentNode, path && path.slice(0));
-            return;
-          }
-        } else {
-          onStep(currentNode, path && path.slice(0));
-          return;
-        }
-      } while (!currentNode.nextSibling);
       currentNode = currentNode.nextSibling;
-
       if (includePath) path.push(path.pop() + 1);
     }
-
-    if (onStep(currentNode, path && path.slice(0))) return;
   }
 };
 
