@@ -1486,7 +1486,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (html) {
   var normalizedHTML = (0, _normalizeHtml2.default)(html);
-  var container = document.createElement('div');
+  var container = dummyDocument.createElement('div');
 
   container.innerHTML = normalizedHTML;
 
@@ -1502,6 +1502,8 @@ var _normalizeHtml = __webpack_require__(9);
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var dummyDocument = document.implementation.createHTMLDocument();
 
 /***/ }),
 /* 39 */

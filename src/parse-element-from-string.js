@@ -1,8 +1,10 @@
 import normalizeHTML from './normalize-html';
 
+const dummyDocument = document.implementation.createHTMLDocument();
+
 export default function (html) {
   const normalizedHTML = normalizeHTML(html);
-  const container = document.createElement('div');
+  const container = dummyDocument.createElement('div');
 
   container.innerHTML = normalizedHTML;
 
