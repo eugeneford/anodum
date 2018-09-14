@@ -1,5 +1,6 @@
 import copyElementAttributes from './copy-element-attributes';
 import domParser from './dom-parser';
+import getClosestScrollableElement from './get-closest-scrollable-element';
 import getElementHeight from './get-element-height';
 import getNodeByTreePath from './get-node-by-tree-path';
 import getTreePathOfNode from './get-tree-path-of-node';
@@ -43,6 +44,7 @@ import xmlSerializer from './xml-serializer';
 module.exports = {
   copyElementAttributes,
   domParser,
+  getClosestScrollableElement,
   getElementHeight,
   getNodeByTreePath,
   getTreePathOfNode,

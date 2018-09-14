@@ -1,6 +1,7 @@
 import {
   copyElementAttributes,
   domParser,
+  getClosestScrollableElement,
   getElementHeight,
   getNodeByTreePath,
   getTreePathOfNode,
@@ -43,6 +44,7 @@ import {
 } from '../src/index';
 
 import './copy-element-attributes.spec';
+import './get-closest-scrollable-element.spec';
 import './get-element-height.spec';
 import './get-node-by-tree-path.spec';
 import './get-tree-path-of-node.spec';
@@ -88,6 +90,10 @@ describe('Anodum', () => {
 
   it('domParser is defined', () => {
     expect(typeof domParser).toBe('object');
+  });
+
+  it('getClosestScrollableElement() is defined', () => {
+    expect(getClosestScrollableElement).toBeDefined();
   });
 
   it('getElementHeight() is defined', () => {

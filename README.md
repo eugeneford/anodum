@@ -83,6 +83,16 @@ copyElementAttributes(sourceNode, targetNode);
 // tragetNode.getAttribute('class') => 'container'
 ```
 
+### getClosestScrollableElement(rootNode)
+Get the closest element that has a scrollable area
+
+```js
+import { getClosestScrollableElement } from "anodum"; // or anodum.getElementHeight if using in browser
+
+const element = document.createElement('div');
+
+const scrollableElement = getClosestScrollableElement(element); // scrollableElement => document.body
+```
 
 ### getElementHeight(element, includeMargins)
 Calculates ``element`` height. If ``includeMargins`` is set to true the final value will include top and bottom margins
