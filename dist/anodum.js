@@ -861,7 +861,7 @@ exports.default = function (rootNode) {
     element = element.parentElement;
   }
 
-  return ownerDocument.scrollingElement;
+  return ownerDocument;
 };
 
 var _isNode = __webpack_require__(1);

@@ -47,7 +47,7 @@ describe('getClosestScrollableElement', () => {
           document.body.insertAdjacentElement('afterbegin', container);
 
           const scrollableElement = getClosestScrollableElement(container.firstChild);
-          expect(scrollableElement).toBe(document.scrollingElement);
+          expect(scrollableElement).toBe(document);
 
           document.body.removeChild(container);
         });
@@ -60,7 +60,7 @@ describe('getClosestScrollableElement', () => {
         document.body.insertAdjacentElement('afterbegin', container);
 
         const scrollableElement = getClosestScrollableElement(container);
-        expect(scrollableElement).toBe(document.scrollingElement);
+        expect(scrollableElement).toBe(document);
 
         document.body.removeChild(container);
       });
@@ -106,7 +106,7 @@ describe('getClosestScrollableElement', () => {
         document.body.insertAdjacentElement('afterbegin', container);
 
         const scrollableElement = getClosestScrollableElement(container);
-        expect(scrollableElement).toBe(document.scrollingElement);
+        expect(scrollableElement).toBe(document);
 
         document.body.removeChild(container);
       });

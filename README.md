@@ -91,7 +91,7 @@ import { getClosestScrollableElement } from "anodum"; // or anodum.getElementHei
 
 const element = document.createElement('div');
 
-const scrollableElement = getClosestScrollableElement(element); // scrollableElement => document.body
+const scrollableElement = getClosestScrollableElement(element); // scrollableElement => document
 ```
 
 ### getElementHeight(element, includeMargins)

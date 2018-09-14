@@ -24,5 +24,5 @@ export default function (rootNode) {
     element = element.parentElement;
   }
 
-  return ownerDocument.scrollingElement;
+  return ownerDocument;
 }
