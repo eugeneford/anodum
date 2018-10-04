@@ -83,11 +83,12 @@ copyElementAttributes(sourceNode, targetNode);
 // tragetNode.getAttribute('class') => 'container'
 ```
 
-### getClosestScrollableElement(rootNode)
-Get the closest element that has a scrollable area
+### getClosestScrollableElement(rootNode, useClientHeight)
+Get the closest element that has a scrollable area. If `useClientHeight` is set to false, function doesn't compare 
+element's scrollHeight and clientHeight. Default value is true.
 
 ```js
-import { getClosestScrollableElement } from "anodum"; // or anodum.getElementHeight if using in browser
+import { getClosestScrollableElement } from "anodum"; // or anodum.getClosestScrollableElement if using in browser
 
 const element = document.createElement('div');
 
