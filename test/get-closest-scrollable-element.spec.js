@@ -39,6 +39,42 @@ describe('getClosestScrollableElement', () => {
         });
       });
 
+      describe('when that node has overflow:scroll and clientHeight equals scrollHeight', () => {
+        describe('when use clientHeight is set to false', () => {
+          it('should return that node', () => {
+            const container = document.createElement('div');
+            const useClientHeight = false;
+            container.style.overflow = 'scroll';
+            container.style.height = '100px';
+            container.innerHTML = '<div style="height: 50px"></div>';
+            const { firstChild } = container;
+            document.body.insertAdjacentElement('afterbegin', container);
+
+            const scrollableElement = getClosestScrollableElement(firstChild, useClientHeight);
+            expect(scrollableElement).toBe(container);
+
+            document.body.removeChild(container);
+          });
+        });
+
+        describe('when use clientHeight is set to true', () => {
+          it('should return the default scrolling element', () => {
+            const container = document.createElement('div');
+            const useClientHeight = true;
+            container.style.overflow = 'scroll';
+            container.style.height = '100px';
+            container.innerHTML = '<div style="height: 50px"></div>';
+            const { firstChild } = container;
+            document.body.insertAdjacentElement('afterbegin', container);
+
+            const scrollableElement = getClosestScrollableElement(firstChild, useClientHeight);
+            expect(scrollableElement).toBe(document);
+
+            document.body.removeChild(container);
+          });
+        });
+      });
+
       describe('when that node does not have any of above', () => {
         it('should return the default scrolling element', () => {
           const container = document.createElement('div');

@@ -841,6 +841,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (rootNode) {
+  var useClientHeight = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
   if (!(0, _isNode2.default)(rootNode)) {
     throw new TypeError('rootNode is not a Node');
   }
@@ -854,7 +856,7 @@ exports.default = function (rootNode) {
     var style = defaultView.getComputedStyle(element, null);
     var overflow = style.getPropertyValue('overflow');
 
-    if ((overflow === OVERFLOW_AUTO || overflow === OVERFLOW_SCROLL) && element.scrollHeight > element.clientHeight) {
+    if ((overflow === OVERFLOW_AUTO || overflow === OVERFLOW_SCROLL) && (!useClientHeight || useClientHeight && element.scrollHeight > element.clientHeight)) {
       return element;
     }
 
