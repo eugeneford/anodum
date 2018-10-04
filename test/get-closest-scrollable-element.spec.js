@@ -57,7 +57,7 @@ describe('getClosestScrollableElement', () => {
           });
         });
 
-        describe('when use clientHeight is set to false', () => {
+        describe('when use clientHeight is set to true', () => {
           it('should return the default scrolling element', () => {
             const container = document.createElement('div');
             const useClientHeight = true;
