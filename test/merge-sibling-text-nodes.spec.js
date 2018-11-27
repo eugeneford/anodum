@@ -23,7 +23,7 @@ describe('mergeSiblingTextNodes', () => {
   });
   describe('when node is not a TextNode', () => {
     it('should throw a TypeError', () => {
-      expect(() => mergeSiblingTextNodes(1)).toThrowError(TypeError);
+      expect(() => mergeSiblingTextNodes(document.createElement('div'))).toThrowError(TypeError);
     });
   });
 });
