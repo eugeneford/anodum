@@ -71,17 +71,31 @@ describe('traverseNode', () => {
   });
 
   describe('when rootNode has nextSibling textNode', () => {
-    it('all dom nodes are reached', () => {
+    it('all rootNode nodes are reached', () => {
       const html = '<html><head></head><body><h1>Hello World</h1>   </body></html>';
       const dom = domParser.parseFromString(html, 'text/html');
       const nodes = [];
-      const headingElement = dom.querySelector('h1');
+      const rootNode = dom.querySelector('h1');
 
-      traverseNode(headingElement, (node) => {
+      traverseNode(rootNode, (node) => {
         nodes.push(node);
       });
 
       expect(nodes.length).toBe(2);
+    });
+  });
+  describe('when rootNode does not have children and has nextSibling', () => {
+    it('only rootNode is reached', () => {
+      const html = '<html><head></head><body><h1></h1>   </body></html>';
+      const dom = domParser.parseFromString(html, 'text/html');
+      const nodes = [];
+      const rootNode = dom.querySelector('h1');
+
+      traverseNode(rootNode, (node) => {
+        nodes.push(node);
+      });
+
+      expect(nodes.length).toBe(1);
     });
   });
 });
