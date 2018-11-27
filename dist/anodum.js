@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -521,6 +521,44 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+exports.default = function (node) {
+  if (!(0, _isTextNode2.default)(node)) {
+    throw new TypeError('node is not a TextNode');
+  }
+  var parentNode = node.parentNode;
+
+  var textNode = node;
+
+  // Merge all heading text nodes
+  while (textNode.previousSibling && (0, _isTextNode2.default)(textNode.previousSibling)) {
+    textNode.nodeValue = textNode.previousSibling.nodeValue + textNode.nodeValue;
+    parentNode.removeChild(textNode.previousSibling);
+  }
+
+  // Merge all trailing text nodes
+  while (textNode.nextSibling && (0, _isTextNode2.default)(textNode.nextSibling)) {
+    textNode.nodeValue += textNode.nextSibling.nodeValue;
+    parentNode.removeChild(textNode.nextSibling);
+  }
+};
+
+var _isTextNode = __webpack_require__(4);
+
+var _isTextNode2 = _interopRequireDefault(_isTextNode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 exports.default = function (node, onStep) {
   var includePath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
@@ -576,13 +614,13 @@ var _getTreePathOfNode2 = _interopRequireDefault(_getTreePathOfNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _copyElementAttributes = __webpack_require__(21);
+var _copyElementAttributes = __webpack_require__(22);
 
 var _copyElementAttributes2 = _interopRequireDefault(_copyElementAttributes);
 
@@ -590,15 +628,15 @@ var _domParser = __webpack_require__(10);
 
 var _domParser2 = _interopRequireDefault(_domParser);
 
-var _getClosestScrollableElement = __webpack_require__(22);
+var _getClosestScrollableElement = __webpack_require__(23);
 
 var _getClosestScrollableElement2 = _interopRequireDefault(_getClosestScrollableElement);
 
-var _getElementHeight = __webpack_require__(23);
+var _getElementHeight = __webpack_require__(24);
 
 var _getElementHeight2 = _interopRequireDefault(_getElementHeight);
 
-var _getNodeByTreePath = __webpack_require__(24);
+var _getNodeByTreePath = __webpack_require__(25);
 
 var _getNodeByTreePath2 = _interopRequireDefault(_getNodeByTreePath);
 
@@ -606,23 +644,23 @@ var _getTreePathOfNode = __webpack_require__(11);
 
 var _getTreePathOfNode2 = _interopRequireDefault(_getTreePathOfNode);
 
-var _hasNonEmptyPseudoElements = __webpack_require__(25);
+var _hasNonEmptyPseudoElements = __webpack_require__(26);
 
 var _hasNonEmptyPseudoElements2 = _interopRequireDefault(_hasNonEmptyPseudoElements);
 
-var _hasNonEmptyShallowTextNodes = __webpack_require__(26);
+var _hasNonEmptyShallowTextNodes = __webpack_require__(27);
 
 var _hasNonEmptyShallowTextNodes2 = _interopRequireDefault(_hasNonEmptyShallowTextNodes);
 
-var _isAttributeNode = __webpack_require__(27);
+var _isAttributeNode = __webpack_require__(28);
 
 var _isAttributeNode2 = _interopRequireDefault(_isAttributeNode);
 
-var _isChildOfElement = __webpack_require__(28);
+var _isChildOfElement = __webpack_require__(29);
 
 var _isChildOfElement2 = _interopRequireDefault(_isChildOfElement);
 
-var _isChildOfTag = __webpack_require__(29);
+var _isChildOfTag = __webpack_require__(30);
 
 var _isChildOfTag2 = _interopRequireDefault(_isChildOfTag);
 
@@ -634,7 +672,7 @@ var _isConditionalCommentNode = __webpack_require__(13);
 
 var _isConditionalCommentNode2 = _interopRequireDefault(_isConditionalCommentNode);
 
-var _isDocumentFragmentNode = __webpack_require__(30);
+var _isDocumentFragmentNode = __webpack_require__(31);
 
 var _isDocumentFragmentNode2 = _interopRequireDefault(_isDocumentFragmentNode);
 
@@ -650,7 +688,7 @@ var _isElementNode = __webpack_require__(2);
 
 var _isElementNode2 = _interopRequireDefault(_isElementNode);
 
-var _isEmbedElement = __webpack_require__(31);
+var _isEmbedElement = __webpack_require__(32);
 
 var _isEmbedElement2 = _interopRequireDefault(_isEmbedElement);
 
@@ -662,7 +700,7 @@ var _isInteractiveElement = __webpack_require__(16);
 
 var _isInteractiveElement2 = _interopRequireDefault(_isInteractiveElement);
 
-var _isNestingAllowed = __webpack_require__(32);
+var _isNestingAllowed = __webpack_require__(33);
 
 var _isNestingAllowed2 = _interopRequireDefault(_isNestingAllowed);
 
@@ -682,15 +720,15 @@ var _isPhrasingElement = __webpack_require__(17);
 
 var _isPhrasingElement2 = _interopRequireDefault(_isPhrasingElement);
 
-var _isProcessingInstructionNode = __webpack_require__(33);
+var _isProcessingInstructionNode = __webpack_require__(34);
 
 var _isProcessingInstructionNode2 = _interopRequireDefault(_isProcessingInstructionNode);
 
-var _isRenderedNode = __webpack_require__(34);
+var _isRenderedNode = __webpack_require__(35);
 
 var _isRenderedNode2 = _interopRequireDefault(_isRenderedNode);
 
-var _isSameOrContains = __webpack_require__(35);
+var _isSameOrContains = __webpack_require__(36);
 
 var _isSameOrContains2 = _interopRequireDefault(_isSameOrContains);
 
@@ -698,7 +736,7 @@ var _isSectioningElement = __webpack_require__(18);
 
 var _isSectioningElement2 = _interopRequireDefault(_isSectioningElement);
 
-var _isSelfClosingElement = __webpack_require__(36);
+var _isSelfClosingElement = __webpack_require__(37);
 
 var _isSelfClosingElement2 = _interopRequireDefault(_isSelfClosingElement);
 
@@ -710,7 +748,7 @@ var _isTextNode = __webpack_require__(4);
 
 var _isTextNode2 = _interopRequireDefault(_isTextNode);
 
-var _isValidSelector = __webpack_require__(37);
+var _isValidSelector = __webpack_require__(38);
 
 var _isValidSelector2 = _interopRequireDefault(_isValidSelector);
 
@@ -718,19 +756,23 @@ var _nodeTypes = __webpack_require__(0);
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 
+var _mergeSiblingTextNodes = __webpack_require__(19);
+
+var _mergeSiblingTextNodes2 = _interopRequireDefault(_mergeSiblingTextNodes);
+
 var _normalizeHtml = __webpack_require__(9);
 
 var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 
-var _parseDocumentFromString = __webpack_require__(38);
+var _parseDocumentFromString = __webpack_require__(39);
 
 var _parseDocumentFromString2 = _interopRequireDefault(_parseDocumentFromString);
 
-var _parseElementFromString = __webpack_require__(39);
+var _parseElementFromString = __webpack_require__(40);
 
 var _parseElementFromString2 = _interopRequireDefault(_parseElementFromString);
 
-var _removeSetOfNodes = __webpack_require__(40);
+var _removeSetOfNodes = __webpack_require__(41);
 
 var _removeSetOfNodes2 = _interopRequireDefault(_removeSetOfNodes);
 
@@ -742,7 +784,7 @@ var _serializeDocumentType = __webpack_require__(43);
 
 var _serializeDocumentType2 = _interopRequireDefault(_serializeDocumentType);
 
-var _traverseNode = __webpack_require__(19);
+var _traverseNode = __webpack_require__(20);
 
 var _traverseNode2 = _interopRequireDefault(_traverseNode);
 
@@ -787,6 +829,7 @@ module.exports = {
   isTextNode: _isTextNode2.default,
   isValidSelector: _isValidSelector2.default,
   nodeTypes: _nodeTypes2.default,
+  mergeSiblingTextNodes: _mergeSiblingTextNodes2.default,
   normalizeHTML: _normalizeHtml2.default,
   parseDocumentFromString: _parseDocumentFromString2.default,
   parseElementFromString: _parseElementFromString2.default,
@@ -798,7 +841,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -831,7 +874,7 @@ var _isElementNode2 = _interopRequireDefault(_isElementNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -877,7 +920,7 @@ var OVERFLOW_AUTO = 'auto';
 var OVERFLOW_SCROLL = 'scroll';
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -909,7 +952,7 @@ var _isElementNode2 = _interopRequireDefault(_isElementNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -957,7 +1000,7 @@ var _isNode2 = _interopRequireDefault(_isNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -988,7 +1031,7 @@ var _isElementNode2 = _interopRequireDefault(_isElementNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1027,7 +1070,7 @@ var _isNonEmptyTextNode2 = _interopRequireDefault(_isNonEmptyTextNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1048,7 +1091,7 @@ var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1090,7 +1133,7 @@ var _isElementNode2 = _interopRequireDefault(_isElementNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1129,7 +1172,7 @@ var _isNode2 = _interopRequireDefault(_isNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1150,7 +1193,7 @@ var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1171,7 +1214,7 @@ var _isOneOfTags2 = _interopRequireDefault(_isOneOfTags);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1365,7 +1408,7 @@ var _isInteractiveElement2 = _interopRequireDefault(_isInteractiveElement);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1386,7 +1429,7 @@ var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1413,7 +1456,7 @@ var _isDocumentNode2 = _interopRequireDefault(_isDocumentNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1429,7 +1472,7 @@ exports.default = function (element, testElement) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1450,7 +1493,7 @@ var _isOneOfTags2 = _interopRequireDefault(_isOneOfTags);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1472,7 +1515,7 @@ exports.default = function (selector) {
 var testDiv = document.createElement('div');
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1507,7 +1550,7 @@ var _domParser = __webpack_require__(10);
 
 var _domParser2 = _interopRequireDefault(_domParser);
 
-var _traverseNode = __webpack_require__(19);
+var _traverseNode = __webpack_require__(20);
 
 var _traverseNode2 = _interopRequireDefault(_traverseNode);
 
@@ -1526,7 +1569,7 @@ var _normalizeHtml2 = _interopRequireDefault(_normalizeHtml);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1558,7 +1601,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var dummyDocument = document.implementation.createHTMLDocument();
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1602,49 +1645,9 @@ var _isTextNode = __webpack_require__(4);
 
 var _isTextNode2 = _interopRequireDefault(_isTextNode);
 
-var _mergeSiblingTextNodes = __webpack_require__(41);
+var _mergeSiblingTextNodes = __webpack_require__(19);
 
 var _mergeSiblingTextNodes2 = _interopRequireDefault(_mergeSiblingTextNodes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (node) {
-  console.log(node);
-  console.log(!(0, _isTextNode2.default)(node));
-  if (!(0, _isTextNode2.default)(node)) {
-    throw new TypeError('node is not a TextNode');
-  }
-  var parentNode = node.parentNode;
-
-  var textNode = node;
-
-  // Merge all heading text nodes
-  while (textNode.previousSibling && (0, _isTextNode2.default)(textNode.previousSibling)) {
-    textNode.nodeValue = textNode.previousSibling.nodeValue + textNode.nodeValue;
-    parentNode.removeChild(textNode.previousSibling);
-  }
-
-  // Merge all trailing text nodes
-  while (textNode.nextSibling && (0, _isTextNode2.default)(textNode.nextSibling)) {
-    textNode.nodeValue += textNode.nextSibling.nodeValue;
-    parentNode.removeChild(textNode.nextSibling);
-  }
-};
-
-var _isTextNode = __webpack_require__(4);
-
-var _isTextNode2 = _interopRequireDefault(_isTextNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
