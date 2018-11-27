@@ -36,6 +36,7 @@ export default function (node, onStep, includePath = false) {
         if (includePath) path.pop();
       }
 
+      if (currentNode === rootNode) return;
       currentNode = currentNode.nextSibling;
       if (includePath) path.push(path.pop() + 1);
     }

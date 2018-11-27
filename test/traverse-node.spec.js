@@ -69,4 +69,19 @@ describe('traverseNode', () => {
     });
     expect(onStep).toHaveBeenCalledTimes(1);
   });
+
+  describe('when rootNode has nextSibling textNode', () => {
+    it('all dom nodes are reached', () => {
+      const html = '<html><head></head><body><h1>Hello World</h1>   </body></html>';
+      const dom = domParser.parseFromString(html, 'text/html');
+      const nodes = [];
+      const headingElement = dom.querySelector('h1');
+
+      traverseNode(headingElement, (node) => {
+        nodes.push(node);
+      });
+
+      expect(nodes.length).toBe(2);
+    });
+  });
 });
