@@ -491,6 +491,22 @@ import { isValidSelector } from "anodum"; // or anodum.isValidSelector if using 
 const result = isValidSelector('div'); // result => true
 ```
 
+### mergeSiblingTextNodes(node)
+Merges all sibling text nodes into single one 
+
+```js
+import { mergeSiblingTextNodes } from "anodum"; // or anodum.mergeSiblingTextNodes if using in browser
+
+const html = 'hello';
+const dom = domParser.parseFromString(html, 'text/html');
+dom.body.appendChild(document.createTextNode('world'));
+
+mergeSiblingTextNodes(dom.body.firstChild);
+
+// dom.body.childNodes.length => 1
+// dom.body.childNodes[0].textContent => 'helloworld'
+```
+
 ### normalizeHTML(html)
 Removes/Replaced unmaintainable symbols from target html string
 

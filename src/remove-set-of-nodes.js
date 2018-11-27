@@ -1,5 +1,6 @@
 import isNode from './is-node';
 import isTextNode from './is-text-node';
+import mergeSiblingTextNodes from './merge-sibling-text-nodes';
 
 export default function (nodes) {
   if (!(nodes instanceof Array)) {
@@ -20,16 +21,8 @@ export default function (nodes) {
 
     const child = parentNode.childNodes[index];
 
-    // Merge all heading text nodes in order to prevent contenteditable issues
-    while (isTextNode(child) && child.previousSibling && isTextNode(child.previousSibling)) {
-      child.nodeValue = child.previousSibling.nodeValue + child.nodeValue;
-      parentNode.removeChild(child.previousSibling);
-    }
-
-    // Merge all trailing text nodes in order to prevent contenteditable issues
-    while (isTextNode(child) && child.nextSibling && isTextNode(child.nextSibling)) {
-      child.nodeValue += child.nextSibling.nodeValue;
-      parentNode.removeChild(child.nextSibling);
+    if (isTextNode(child)) {
+      mergeSiblingTextNodes(child);
     }
   });
 }
