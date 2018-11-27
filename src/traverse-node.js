@@ -18,6 +18,11 @@ export default function (node, onStep, includePath = false) {
 
   // Create path holder if includePath = true was passed
   if (includePath) path = getTreePathOfNode(rootNode);
+  // If rootNode hasn't childNodes, invoke callback only for rootNode
+  if (!rootNode.hasChildNodes()) {
+    onStep(rootNode, path);
+    return;
+  }
 
   while (currentNode) {
     if (onStep(currentNode, path)) return;
