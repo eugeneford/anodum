@@ -20,8 +20,8 @@ export default function (nodes) {
     parentNode.removeChild(node);
 
     const child = parentNode.childNodes[index];
-
     if (isTextNode(child)) {
+      // Merge all sibling text nodes in order to prevent contenteditable issues
       mergeSiblingTextNodes(child);
     }
   });
