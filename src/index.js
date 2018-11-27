@@ -32,6 +32,7 @@ import isTag from './is-tag';
 import isTextNode from './is-text-node';
 import isValidSelector from './is-valid-selector';
 import nodeTypes from './node-types';
+import mergeSiblingTextNodes from './merge-sibling-text-nodes';
 import normalizeHTML from './normalize-html';
 import parseDocumentFromString from './parse-document-from-string';
 import parseElementFromString from './parse-element-from-string';
@@ -76,6 +77,7 @@ module.exports = {
   isTextNode,
   isValidSelector,
   nodeTypes,
+  mergeSiblingTextNodes,
   normalizeHTML,
   parseDocumentFromString,
   parseElementFromString,

@@ -558,6 +558,7 @@ exports.default = function (node, onStep) {
         if (includePath) path.pop();
       }
 
+      if (currentNode === rootNode) return;
       currentNode = currentNode.nextSibling;
       if (includePath) path.push(path.pop() + 1);
     }
@@ -1586,8 +1587,10 @@ exports.default = function (nodes) {
     parentNode.removeChild(node);
 
     var child = parentNode.childNodes[index];
-
-    (0, _mergeSiblingTextNodes2.default)(child);
+    if ((0, _isTextNode2.default)(child)) {
+      // Merge all sibling text nodes in order to prevent contenteditable issues
+      (0, _mergeSiblingTextNodes2.default)(child);
+    }
   });
 };
 
@@ -1617,6 +1620,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (node) {
+  console.log(node);
+  console.log(!(0, _isTextNode2.default)(node));
   if (!(0, _isTextNode2.default)(node)) {
     throw new TypeError('node is not a TextNode');
   }
@@ -1624,14 +1629,14 @@ exports.default = function (node) {
 
   var textNode = node;
 
-  // Merge all heading text nodes in order to prevent contenteditable issues
-  while ((0, _isTextNode2.default)(textNode) && textNode.previousSibling && (0, _isTextNode2.default)(textNode.previousSibling)) {
+  // Merge all heading text nodes
+  while (textNode.previousSibling && (0, _isTextNode2.default)(textNode.previousSibling)) {
     textNode.nodeValue = textNode.previousSibling.nodeValue + textNode.nodeValue;
     parentNode.removeChild(textNode.previousSibling);
   }
 
-  // Merge all trailing text nodes in order to prevent contenteditable issues
-  while ((0, _isTextNode2.default)(textNode) && textNode.nextSibling && (0, _isTextNode2.default)(textNode.nextSibling)) {
+  // Merge all trailing text nodes
+  while (textNode.nextSibling && (0, _isTextNode2.default)(textNode.nextSibling)) {
     textNode.nodeValue += textNode.nextSibling.nodeValue;
     parentNode.removeChild(textNode.nextSibling);
   }
