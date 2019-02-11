@@ -4,5 +4,5 @@ export default function (html) {
   }
   return html.trim()
     .replace(/[\r\uFEFF\u2060]/g, '')
-    .replace(/[\n\t\u202F\u2007]/g, ' ');
+    .replace(/[\t\u202F\u2007]/g, ' ');
 }

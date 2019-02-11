@@ -55,11 +55,6 @@ describe('normalizeHTML', () => {
     expect(normalizeHTML(html)).toEqual('<div>test</div>');
   });
 
-  it('non-trailing newlines are replaced with spaces', () => {
-    const html = '<div>test\n</div>';
-    expect(normalizeHTML(html)).toEqual('<div>test </div>');
-  });
-
   it('non-trailing carriage returns are removed', () => {
     const html = '<div>test\r</div>';
     expect(normalizeHTML(html)).toEqual('<div>test</div>');
