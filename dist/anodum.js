@@ -349,7 +349,7 @@ exports.default = function (node) {
     return false;
   }
 
-  return node.nodeValue.trim().length > 0;
+  return node.nodeValue.trim().length > 0 || node.nodeValue.includes(NBSP_SYMBOL);
 };
 
 var _isTextNode = __webpack_require__(4);
@@ -357,6 +357,8 @@ var _isTextNode = __webpack_require__(4);
 var _isTextNode2 = _interopRequireDefault(_isTextNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NBSP_SYMBOL = String.fromCharCode(160);
 
 /***/ }),
 /* 13 */

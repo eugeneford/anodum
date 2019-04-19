@@ -7,6 +7,13 @@ describe('isNonEmptyTextNode', () => {
     expect(result).toBe(true);
   });
 
+  it('"&nbsp;" is a non empty text node', () => {
+    const NBSP_SYMBOL = String.fromCharCode(160);
+    const node = document.createTextNode(NBSP_SYMBOL);
+    const result = isNonEmptyTextNode(node);
+    expect(result).toBe(true);
+  });
+
   it('"" is not a non empty text node', () => {
     const node = document.createTextNode('');
     const result = isNonEmptyTextNode(node);
