@@ -18,7 +18,7 @@ export default function(node, rootNode) {
   let elem = node;
   let index;
 
-  while (elem.parentNode && elem.parentNode !== rootNode) {
+  while (elem.parentNode && elem !== rootNode) {
     index = Array.prototype.indexOf.call(elem.parentNode.childNodes, elem);
     path.unshift(index);
     elem = elem.parentNode;

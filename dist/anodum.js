@@ -306,16 +306,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function (node) {
+exports.default = function (node, rootNode) {
   if (!(0, _isNode2.default)(node)) {
-    throw new TypeError('node is not a Node');
+    throw new TypeError("node is not a Node");
+  }
+
+  if (rootNode) {
+    if (!(0, _isNode2.default)(rootNode)) {
+      throw new TypeError("rootNode is not a Node");
+    }
+    if (!rootNode.contains(node)) {
+      throw new Error("rootNode doesn't contain a node");
+    }
   }
 
   var path = [];
   var elem = node;
   var index = void 0;
 
-  while (elem.parentNode) {
+  while (elem.parentNode && elem !== rootNode) {
     index = Array.prototype.indexOf.call(elem.parentNode.childNodes, elem);
     path.unshift(index);
     elem = elem.parentNode;
