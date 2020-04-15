@@ -84,7 +84,7 @@ copyElementAttributes(sourceNode, targetNode);
 ```
 
 ### getClosestScrollableElement(rootNode, useClientHeight)
-Get the closest element that has a scrollable area. If `useClientHeight` is set to false, function doesn't compare 
+Get the closest element that has a scrollable area. If `useClientHeight` is set to false, function doesn't compare
 element's scrollHeight and clientHeight. Default value is true.
 
 ```js
@@ -129,8 +129,10 @@ const node = getNodeByTreePath(rootNode, path);
 ```
 
 
-### getTreePathOfNode(node)
+### getTreePathOfNode(node, rootNode)
 Calculates a tree path of target ``node``.
+
+``rootNode`` - is an optional parameter that sets the root element relative to which the path is calculated
 
 ```js
 import { getTreePathOfNode } from "anodum"; // or anodum.getTreePathOfNode if using in browser
@@ -492,7 +494,7 @@ const result = isValidSelector('div'); // result => true
 ```
 
 ### mergeSiblingTextNodes(node)
-Merges all sibling text nodes into single one 
+Merges all sibling text nodes into single one
 
 ```js
 import { mergeSiblingTextNodes } from "anodum"; // or anodum.mergeSiblingTextNodes if using in browser
