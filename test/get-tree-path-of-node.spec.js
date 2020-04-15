@@ -39,7 +39,7 @@ describe("getTreePathOfNode", () => {
           childElement.lastChild.firstChild,
           rootElement
         ).toString()
-      ).toBe("0,1,0");
+      ).toBe("0,1,1,0");
     });
   });
 });

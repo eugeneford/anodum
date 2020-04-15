@@ -324,7 +324,7 @@ exports.default = function (node, rootNode) {
   var elem = node;
   var index = void 0;
 
-  while (elem.parentNode && elem.parentNode !== rootNode) {
+  while (elem.parentNode && elem !== rootNode) {
     index = Array.prototype.indexOf.call(elem.parentNode.childNodes, elem);
     path.unshift(index);
     elem = elem.parentNode;
